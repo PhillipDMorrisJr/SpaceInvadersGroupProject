@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="SpaceInvaders.View.Sprites.Level3EnemyShipSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SpaceInvaders.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="33"
+    d:DesignWidth="50"
+    Height="33"
+    Width="50">
+
+    <Canvas>
+        <Image x:Name="image" Height="46.29" Width="90.965" Source="http://2.bp.blogspot.com/-0RjklQJvRyg/VllqvSo-u1I/AAAAAAAACHU/J-MkW3RuB_4/s1600/spco.png" RenderTransformOrigin="0.5,0.5" Canvas.Left="-20.023" Canvas.Top="1.949" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Image.RenderTransform>
+                <CompositeTransform Rotation="180.593"/>
+            </Image.RenderTransform>
+        </Image>
+
+    </Canvas>
+</UserControl>

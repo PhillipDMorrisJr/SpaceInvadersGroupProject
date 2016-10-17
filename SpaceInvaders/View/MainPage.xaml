@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="SpaceInvaders.View.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sprites="using:SpaceInvaders.View.Sprites"
+    mc:Ignorable="d">
+
+    <Canvas x:Name="theCanvas" Width="640" Height="480">
+        <Image Source="https://static3.scirra.net/images/newstore/products/112/splash.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="1990" Width="1380" Canvas.Left="-220" Canvas.Top="-770" />
+        <TextBlock x:Name="textBlock" Canvas.Left="518" TextWrapping="Wrap" Canvas.Top="10" Height="39" Width="112" Foreground="Cyan"/>
+    </Canvas>
+</Page>
