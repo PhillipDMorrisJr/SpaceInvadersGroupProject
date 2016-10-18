@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="36.111"
+    Height="40.667"
     Width="51.778">
 
     <UserControl.Resources>
@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <Canvas>
-        <Image x:Name="image" Height="42.108" Width="64.211" Source="http://www.puppetsquid.com/FTL/stfx/arwing_base.png" RenderTransformOrigin="0.5,0.5" Canvas.Left="-6.55" Canvas.Top="-3.221" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Image x:Name="image" Height="42.108" Width="58.877" Source="http://www.puppetsquid.com/FTL/stfx/arwing_base.png" RenderTransformOrigin="0.5,0.5" Canvas.Left="-3.883" Canvas.Top="-0.554" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Image.RenderTransform>
                 <CompositeTransform Rotation="-90"/>
             </Image.RenderTransform>

@@ -75,9 +75,7 @@ namespace SpaceInvaders.View
             this.updateScoreboard();
             
         }
-
-
-
+        
         private void displayGameOverScreen()
         {            
             if (this.gameManager.IsGameOver())

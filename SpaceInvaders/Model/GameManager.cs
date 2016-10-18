@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model
 {
@@ -83,7 +84,6 @@ namespace SpaceInvaders.Model
             this.gameScoreboard = new Scoreboard();
 
             this.enemyMotionCounter = 0;
-
         }
 
         #endregion
@@ -118,11 +118,6 @@ namespace SpaceInvaders.Model
             }
         }
 
-
-
-
-
-
         private void gameTimerOnTick(object sender, object e)
         {
             this.MoveEnemyShips();
@@ -137,11 +132,24 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void FirePlayerBullet()
         {
+            bool isBulletWaiting = false;
+            foreach (var bullet in this.playerAmmo)
+            {
+                isBulletWaiting = bullet.Y < this.playerShip.Y - this.playerShip.SpeedY;
+            }
+
+
+
+
+            if ((!this.playerAmmo.Any()) || isBulletWaiting)
+            {
+
             this.stockPlayerAmmo();
             var playerBullet = this.playerAmmo[0];
 
             this.handlePlayerBulletHits();
         }
+    }
 
         /// <summary>
         ///     Manages enemy bullet when fired
@@ -149,21 +157,23 @@ namespace SpaceInvaders.Model
         public void FireEnemyBullet()
         {
             this.handleEachEnemyBullet();
-
-            foreach (var enemyBullet in this.enemyAmmo)
+            for (int i = 0; i < this.enemyAmmo.Count; i++)
             {
-                this.moveEnemyBulletDownWhenBulletIsInCanvas(enemyBullet);
-                this.removeBulletFromPlayWhenItHitsPlayerShip(enemyBullet);
+                this.moveEnemyBulletDownWhenBulletIsInCanvas(this.enemyAmmo[i]);
+                this.removeEnemyBulletFromPlayWhenItHitsPlayerShip(this.enemyAmmo[i]);
             }
         }
 
-        private void removeBulletFromPlayWhenItHitsPlayerShip(Bullet enemyBullet)
+        private void removeEnemyBulletFromPlayWhenItHitsPlayerShip(Bullet enemyBullet)
         {
             if (this.bulletHitShip(enemyBullet, this.playerShip))
             {
-                
+
+         
                 this.currentBackground.Children.Remove(this.playerShip.Sprite);
                 this.currentBackground.Children.Remove(enemyBullet.Sprite);
+
+                this.enemyAmmo.Remove(enemyBullet);
                 this.lives.Remove(this.playerShip);
                 this.gameTimer.Stop();
                 this.playerShip.Destroyed = true;
@@ -362,10 +372,10 @@ namespace SpaceInvaders.Model
                 currentEnemy.X = enemyXLocation;
                 enemyXLocation = enemyXLocation + currentEnemy.Width +
                                  PlayerShipTopOffset;
-
+                int topCanvasBuffer = 20;
                 if (level == 1)
                 {
-                    currentEnemy.Y = (EnemyShipOffset + currentEnemy.Height)*this.fleet.AmountOfLevels;
+                    currentEnemy.Y = (topCanvasBuffer + currentEnemy.Height)*this.fleet.AmountOfLevels;
                 }
                 else
                 {
@@ -580,15 +590,26 @@ namespace SpaceInvaders.Model
         /// <returns>return true when the game is over</returns>
         public bool IsGameOver()
         {
-            var gameOver = false;
-            var playerShipIsOutOfPlay = !this.currentBackground.Children.Contains(this.playerShip.Sprite);
-            var enemyShipsOutOfPlay = this.areEnemyShipsOutOfPlay();
-            return areGameOverConditionsMet(enemyShipsOutOfPlay, playerShipIsOutOfPlay, gameOver);
+            if (this.isPlayerOutOfLives() || this.areEnemyShipsOutOfPlay())
+            {
+                return true;
+            }
+               return false;
         }
 
         private bool areEnemyShipsOutOfPlay()
         {
-            if (!this.fleet.GetAllEnemyShips().Any())
+
+            if (!(this.fleet.GetAllEnemyShips().Any() && this.currentBackground.Children.Contains(this.playerShip.Sprite)))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool isPlayerOutOfLives()
+        {
+            if (!this.lives.Any())
             {
                 return true;
             }

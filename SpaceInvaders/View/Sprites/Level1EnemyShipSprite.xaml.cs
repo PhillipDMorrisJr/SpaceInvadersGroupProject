@@ -22,6 +22,7 @@ namespace SpaceInvaders.View.Sprites
         public Level1EnemyShipSprite()
         {
             this.InitializeComponent();
+            
         }
 
         #endregion

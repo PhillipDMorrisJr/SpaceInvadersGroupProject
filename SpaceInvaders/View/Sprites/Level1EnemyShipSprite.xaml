@@ -6,9 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="33"
     d:DesignWidth="50"
-    Height="33"
+    Height="57.667"
     Width="50">
 
     <Canvas Margin="0,0,-16,-26.667" Height="60" VerticalAlignment="Top" HorizontalAlignment="Right" Width="66">

@@ -2,6 +2,7 @@
 using System.Threading;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
@@ -20,8 +21,8 @@ namespace SpaceInvaders.Model
         /// <summary>
         ///     The tick interval in seconds
         /// </summary>
-        public const int TickInterval = 5;
-        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, TickInterval, 0);
+        public const int TickInterval = 25;
+        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, TickInterval);
         private readonly DispatcherTimer timer;
         #endregion
 
@@ -36,6 +37,7 @@ namespace SpaceInvaders.Model
         /// <param name="level">The level.</param>
         public EnemyShip(int level)
         {
+            
             if (level < 1)
             {
                 level = 1;
@@ -49,7 +51,7 @@ namespace SpaceInvaders.Model
             this.enemyLevel = level;
             switch (level)
             {
-
+                    
                 case 1:
                     Sprite = new Level1EnemyShipSprite();
                     SetSpeed(SpeedXDirection, SpeedYDirection);
@@ -75,11 +77,23 @@ namespace SpaceInvaders.Model
 
         private void timerOnTick(object sender, object e)
         {
-            
+
+
             if (this.HasFired)
             {
                     this.HasFired = false;
                 
+            }
+
+            if (this.Sprite.Visibility == Visibility.Collapsed)
+            {
+
+                this.Sprite.Visibility = Visibility.Visible;
+                
+            } else 
+            {
+                Sprite.Visibility = Visibility.Collapsed;
+               
             }
         }
 
