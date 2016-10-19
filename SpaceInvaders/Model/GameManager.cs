@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -14,13 +15,14 @@ namespace SpaceInvaders.Model
         #region Data members
 
         /// <summary>
-        /// The tick interval in milliseconds
+        ///     The tick interval in milliseconds
         /// </summary>
         public const int TickInterval = 25;
 
         private const double PlayerShipBottomOffset = 30;
         private const double PlayerShipTopOffset = 30;
-        private const double EnemyShipOffset = 30;
+        private const double EnemyShipOffset = 10;
+        private const double Half = 0.5;
 
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
@@ -42,6 +44,13 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        ///     Initializes a new default instance of the <see cref="GameManager" /> class.
+        /// </summary>
+        public GameManager() : this(500, 500)
+        {
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GameManager" /> class.
@@ -119,6 +128,8 @@ namespace SpaceInvaders.Model
 
         /// <summary>
         ///     Manages player bullet when fired
+        ///     Precondition: There must be bullets in player ammo
+        ///     Postcondition: Bullet is fired
         /// </summary>
         public void FirePlayerBullet()
         {
@@ -149,6 +160,8 @@ namespace SpaceInvaders.Model
 
         /// <summary>
         ///     Manages enemy bullet when fired
+        ///     Precondition: the enemy must have bullets
+        ///     Postcondition: Enemy fires bullet
         /// </summary>
         public void FireEnemyBullet()
         {
@@ -294,12 +307,16 @@ namespace SpaceInvaders.Model
 
         private void placeEnemyBullet(EnemyShip enemy, Bullet randomBullet)
         {
-            randomBullet.X = enemy.X + enemy.Width/4;
+            
+            randomBullet.X = enemy.X + enemy.Sprite.ActualWidth/2;
             randomBullet.Y = enemy.Y;
         }
 
         /// <summary>
         ///     Manages player bullets
+        ///     Precondition: none
+        ///     Postcondition: Bullets beyond boundaries and bullets that have collided with other Game objects are removedfrom
+        ///     game.
         /// </summary>
         public void HandleBullets()
         {
@@ -372,7 +389,7 @@ namespace SpaceInvaders.Model
 
         private double calculateEnemyXOrigin(EnemyShip levelOneShip, int enemyRowCount)
         {
-            return this.backgroundWidth/2.0 - levelOneShip.Width*(enemyRowCount/2.0) -
+            return this.backgroundWidth* Half - levelOneShip.Width*(enemyRowCount* Half) -
                    EnemyShipOffset;
         }
 
@@ -431,8 +448,7 @@ namespace SpaceInvaders.Model
 
         private void placePlayerShipNearBottomOfBackgroundCentered()
         {
-            var half = 0.5;
-            this.playerShip.X = (this.backgroundWidth - this.playerShip.Width)*half;
+            this.playerShip.X = (this.backgroundWidth - this.playerShip.Width)* Half;
             this.playerShip.Y = this.backgroundHeight - this.playerShip.Height - PlayerShipBottomOffset;
         }
 
@@ -583,7 +599,8 @@ namespace SpaceInvaders.Model
 
         private void placePlayerBullet(Bullet bullet)
         {
-            bullet.X = this.playerShip.X + this.playerShip.Width/4;
+            double halfOfShip = this.playerShip.Sprite.Width* Half;
+            bullet.X = this.playerShip.X + halfOfShip;
             bullet.Y = this.playerShip.Y;
         }
 

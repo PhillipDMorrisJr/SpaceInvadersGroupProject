@@ -3,27 +3,23 @@
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    /// Fleet of enemy ships
+    ///     Fleet of enemy ships
     /// </summary>
     public class EnemyFleet
     {
-        #region Data members
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnemyFleet"/> class base level 1.
+        ///     Initializes a new instance of the <see cref="EnemyFleet" /> class base level 1.
         /// </summary>
         public EnemyFleet() : this(1)
         {
-            
         }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnemyFleet"/> class.
-        /// Precondition: levels must be at least 1
-        /// Postcondition: EnemyFleet Data members are instantiated
+        ///     Initializes a new instance of the <see cref="EnemyFleet" /> class.
+        ///     Precondition: levels must be at least 1
+        ///     Postcondition: EnemyFleet Data members are instantiated
         /// </summary>
         /// <param name="levels">The levels in this fleet.</param>
         public EnemyFleet(int levels)
@@ -67,30 +63,29 @@ namespace SpaceInvaders.Model
             var amountOfEnemiesForCurrentLevel = this.GetAmountOfShipForLevel(level);
             for (var i = 0; i < amountOfEnemiesForCurrentLevel; i++)
             {
-                EnemyShip ship = new EnemyShip(level);
+                var ship = new EnemyShip(level);
                 listOfEnemies.Add(ship);
             }
         }
 
         /// <summary>
-        /// Removes the enemy from fleet.\
-        /// Precondition: enemyRows 
-        /// Postcondition: Enemy is removed from one its list and the size of that list is decreased.
+        ///     Removes the enemy from fleet.\
+        ///     Precondition: enemyRows
+        ///     Postcondition: Enemy is removed from one its list and the size of that list is decreased.
         /// </summary>
         /// <param name="enemyShip">The enemy ship to be removed.</param>
         public void RemoveEnemyFromFleet(EnemyShip enemyShip)
         {
-            foreach (List<EnemyShip> enemyRow in this.Fleet)
+            foreach (var enemyRow in this.Fleet)
             {
                 enemyRow.Remove(enemyShip);
             }
         }
 
-
         /// <summary>
-        /// Gets the firing ships.
-        /// Precondition: none
-        /// Postcondition: none
+        ///     Gets the firing ships.
+        ///     Precondition: none
+        ///     Postcondition: none
         /// </summary>
         /// <returns>List of ships that can fire</returns>
         public List<EnemyShip> GetFiringShips()
@@ -112,9 +107,9 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        /// Gets the enemy ships by level.
-        /// Precondition: none
-        /// Postcondition: none
+        ///     Gets the enemy ships by level.
+        ///     Precondition: none
+        ///     Postcondition: none
         /// </summary>
         /// <param name="level">The level of ships to get.</param>
         /// <returns>List containing the enemies of the secified level</returns>
@@ -136,9 +131,9 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        /// Gets all enemy ships.
-        /// Precondition: none
-        /// Postcondition: none 
+        ///     Gets all enemy ships.
+        ///     Precondition: none
+        ///     Postcondition: none
         /// </summary>
         /// <returns>List of all ships in fleet as one list</returns>
         public List<EnemyShip> GetAllEnemyShips()
@@ -156,16 +151,16 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        /// Gets the amount of ship for current level.
-        /// Precondition: none
-        /// Postcondition: none 
+        ///     Gets the amount of ship for current level.
+        ///     Precondition: none
+        ///     Postcondition: none
         /// </summary>
         /// <param name="level">The level of the ships.</param>
         /// <returns>amount of ships in a row or level within the fleet</returns>
         public int GetAmountOfShipForLevel(int level)
         {
-            int multiplier = 2;
-            int shipsInLevel = multiplier*level;
+            var multiplier = 2;
+            var shipsInLevel = multiplier*level;
             return shipsInLevel;
         }
 
@@ -174,18 +169,18 @@ namespace SpaceInvaders.Model
         #region Property
 
         /// <summary>
-        /// Gets the amount of levels.
+        ///     Gets the amount of levels.
         /// </summary>
         /// <value>
-        /// The amount of levels.
+        ///     The amount of levels.
         /// </value>
         public int AmountOfLevels { get; }
 
         /// <summary>
-        /// Gets the entire fleet.
+        ///     Gets the entire fleet.
         /// </summary>
         /// <value>
-        /// The fleet.
+        ///     The fleet.
         /// </value>
         public List<List<EnemyShip>> Fleet { get; }
 

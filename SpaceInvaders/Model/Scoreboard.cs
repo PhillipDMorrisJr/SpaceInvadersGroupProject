@@ -1,6 +1,7 @@
 ﻿/// <summary>
 /// 
 /// </summary>
+
 namespace SpaceInvaders.Model
 {
     internal class Scoreboard
@@ -10,10 +11,10 @@ namespace SpaceInvaders.Model
         #region Property
 
         /// <summary>
-        /// Gets the score.
+        ///     Gets the score.
         /// </summary>
         /// <value>
-        /// The score.
+        ///     The score.
         /// </value>
         public int Score { get; private set; }
 
@@ -24,7 +25,7 @@ namespace SpaceInvaders.Model
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Scoreboard"/> class.
+        ///     Initializes a new instance of the <see cref="Scoreboard" /> class.
         /// </summary>
         public Scoreboard()
         {

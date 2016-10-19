@@ -32,7 +32,7 @@ namespace SpaceInvaders.Model
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerShip" /> class.
+        ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
         public PlayerShip()
         {

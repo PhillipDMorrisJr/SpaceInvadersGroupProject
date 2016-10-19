@@ -51,10 +51,10 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        /// Gets the x speed of the game object.
+        ///     Gets the x speed of the game object.
         /// </summary>
         /// <value>
-        /// The speed x.
+        ///     The speed x.
         /// </value>
         public int SpeedX { get; private set; }
 

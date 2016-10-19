@@ -5,7 +5,7 @@ using SpaceInvaders.View.Sprites;
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    /// Manages the EnemyShip class.
+    ///     Manages the EnemyShip class.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.GameObject" />
     public class EnemyShip : GameObject
@@ -22,18 +22,18 @@ namespace SpaceInvaders.Model
         #region Properties
 
         /// <summary>
-        /// Gets the get level.
+        ///     Gets the get level.
         /// </summary>
         /// <value>
-        /// The get level.
+        ///     The get level.
         /// </value>
         public int GetLevel { get; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has fired.
+        ///     Gets or sets a value indicating whether this instance has fired.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this instance has fired; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance has fired; otherwise, <c>false</c>.
         /// </value>
         public bool HasFired { get; set; }
 
@@ -42,7 +42,7 @@ namespace SpaceInvaders.Model
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnemyShip"/> class base level 1.
+        ///     Initializes a new instance of the <see cref="EnemyShip" /> class base level 1.
         /// </summary>
         public EnemyShip() : this(1)
         {
@@ -50,8 +50,8 @@ namespace SpaceInvaders.Model
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EnemyShip" /> class.
-        /// Precondition: level must be at least 1.
-        /// Postcondition: new enemyShip created
+        ///     Precondition: level must be at least 1.
+        ///     Postcondition: new enemyShip created
         /// </summary>
         /// <param name="level">The level.</param>
         public EnemyShip(int level)
