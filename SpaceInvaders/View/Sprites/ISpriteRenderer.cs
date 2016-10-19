@@ -1,7 +1,7 @@
 ﻿namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    ///     Interface to render a sprite. This interface is needed within every sprite 
+    ///     Interface to render a sprite. This interface is needed within every sprite
     ///     that is associated with a game object.
     ///     The interface is to be implemented in the sprite class.
     /// </summary>

@@ -12,14 +12,26 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        private const int SpeedXDirection = 3;
-        private const int SpeedYDirection = 0;
         /// <summary>
         ///     The tick interval in seconds
         /// </summary>
         public const int TickInterval = 5;
+
+        private const int SpeedXDirection = 3;
+        private const int SpeedYDirection = 0;
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, TickInterval, 0);
         private readonly DispatcherTimer timer;
+
+        #endregion
+
+        #region Properties
+
+        #region Property
+
+        public bool Destroyed { get; set; }
+
+        #endregion
+
         #endregion
 
         #region Constructors
@@ -29,9 +41,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public PlayerShip()
         {
-
-            this.timer = new DispatcherTimer { Interval = this.gameTickInterval };
-
+            this.timer = new DispatcherTimer {Interval = this.gameTickInterval};
             this.timer.Tick += this.timerOnTick;
             this.timer.Start();
 
@@ -41,19 +51,15 @@ namespace SpaceInvaders.Model
 
         #endregion
 
+        #region Methods
+
         private void timerOnTick(object sender, object e)
         {
-
             if (this.Destroyed)
             {
                 this.Destroyed = false;
-
             }
         }
-
-        #region Property
-
-        public bool Destroyed { get; set; } = false;
 
         #endregion
     }

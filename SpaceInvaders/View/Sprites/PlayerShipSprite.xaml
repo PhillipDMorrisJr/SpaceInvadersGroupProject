@@ -10,13 +10,15 @@
     Width="51.778">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PlayerShipColor" Color="Green"/>
+        <SolidColorBrush x:Key="PlayerShipColor" Color="Green" />
     </UserControl.Resources>
 
     <Canvas>
-        <Image x:Name="image" Height="42.108" Width="58.877" Source="http://www.puppetsquid.com/FTL/stfx/arwing_base.png" RenderTransformOrigin="0.5,0.5" Canvas.Left="-3.883" Canvas.Top="-0.554" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Image x:Name="image" Height="42.108" Width="58.877"
+               Source="http://www.puppetsquid.com/FTL/stfx/arwing_base.png" RenderTransformOrigin="0.5,0.5"
+               Canvas.Left="-3.883" Canvas.Top="-0.554" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Image.RenderTransform>
-                <CompositeTransform Rotation="-90"/>
+                <CompositeTransform Rotation="-90" />
             </Image.RenderTransform>
         </Image>
     </Canvas>

@@ -17,7 +17,7 @@ namespace SpaceInvaders.Model
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Bullet" /> class.
+        ///     Initializes a new instance of the <see cref="Bullet" /> class.
         /// </summary>
         public Bullet()
         {

@@ -1,43 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SpaceInvaders.Model
 {
-    class Fleet
+    internal class Fleet
     {
-        private List<List<EnemyShip>> fleet;
+        #region Data members
 
         private readonly int shipsPerLevel;
-        private readonly int amountOfLevels;
+
+        #endregion
+
+        #region Constructors
 
         public Fleet(int levels)
         {
-            this.amountOfLevels = levels;
+            this.AmountOfLevels = levels;
             this.shipsPerLevel = 4;
-            this.fleet = new List<List<EnemyShip>>();
+            this.FleetProperty = new List<List<EnemyShip>>();
 
             this.addShipsToFleet(levels);
             this.addAllEnemiesToGame();
         }
 
+        #endregion
+
+        #region Methods
+
         private void addShipsToFleet(int levels)
         {
             for (var i = 0; i < levels; i++)
             {
-                List<EnemyShip> enemyRow = new List<EnemyShip>();
-                this.fleet.Add(enemyRow);
+                var enemyRow = new List<EnemyShip>();
+                this.FleetProperty.Add(enemyRow);
             }
         }
-
 
         private void addAllEnemiesToGame()
         {
             var level = 0;
-            foreach (var listOfEnemies in this.fleet)
+            foreach (var listOfEnemies in this.FleetProperty)
             {
                 level++;
                 this.addEnemiesToEachLevelOfEnemies(level, listOfEnemies);
@@ -46,7 +47,7 @@ namespace SpaceInvaders.Model
 
         private void addEnemiesToEachLevelOfEnemies(int level, List<EnemyShip> listOfEnemies)
         {
-            int amountOfEnemiesForCurrentLevel = this.GetAmountOfShipForCurrentLevel(level);
+            var amountOfEnemiesForCurrentLevel = this.GetAmountOfShipForCurrentLevel(level);
             for (var i = 0; i < amountOfEnemiesForCurrentLevel; i++)
             {
                 var ship = new EnemyShip(level);
@@ -54,25 +55,22 @@ namespace SpaceInvaders.Model
             }
         }
 
-
         public void removeEnemyFromFleet(EnemyShip enemyShip)
         {
-            foreach (var enemyRows in this.fleet)
+            foreach (var enemyRows in this.FleetProperty)
             {
                 enemyRows.Remove(enemyShip);
             }
         }
 
-
-
         //Gets ships that can fire
-            public
+        public
             List<EnemyShip> GetFiringShips()
         {
-            List<EnemyShip> firingShips = new List<EnemyShip>();
-            int levelThree = 3;
+            var firingShips = new List<EnemyShip>();
+            var levelThree = 3;
 
-            foreach (var enemyRows in this.fleet)
+            foreach (var enemyRows in this.FleetProperty)
             {
                 foreach (var enemy in enemyRows)
                 {
@@ -81,18 +79,15 @@ namespace SpaceInvaders.Model
                         firingShips.Add(enemy);
                     }
                 }
-
-
             }
             return firingShips;
         }
 
-
         public List<EnemyShip> GetEnemyShipsByLevel(int level)
         {
-            List<EnemyShip> currentLevelShips = new List<EnemyShip>();
+            var currentLevelShips = new List<EnemyShip>();
 
-            foreach (var enemyRows in this.fleet)
+            foreach (var enemyRows in this.FleetProperty)
             {
                 foreach (var enemy in enemyRows)
                 {
@@ -101,25 +96,20 @@ namespace SpaceInvaders.Model
                         currentLevelShips.Add(enemy);
                     }
                 }
-
-
             }
             return currentLevelShips;
         }
 
         public List<EnemyShip> GetAllEnemyShips()
         {
-            List<EnemyShip> enemies = new List<EnemyShip>();
+            var enemies = new List<EnemyShip>();
 
-            foreach (var enemyRows in this.fleet)
+            foreach (var enemyRows in this.FleetProperty)
             {
                 foreach (var enemy in enemyRows)
                 {
-
                     enemies.Add(enemy);
-
                 }
-
             }
             return enemies;
         }
@@ -129,19 +119,14 @@ namespace SpaceInvaders.Model
             return level*2;
         }
 
+        #endregion
 
+        #region Property
 
+        public int AmountOfLevels { get; }
 
- #region Property
-        public int AmountOfLevels => this.amountOfLevels;
-
-
-        public List<List<EnemyShip>> FleetProperty
-        {
-            get { return this.fleet; }
-        }
+        public List<List<EnemyShip>> FleetProperty { get; }
 
         #endregion
-    } 
-   
+    }
 }

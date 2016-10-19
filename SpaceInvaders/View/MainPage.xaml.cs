@@ -33,18 +33,18 @@ namespace SpaceInvaders.View
         ///     The tick interval in milliseconds
         /// </summary>
         public const int TickInterval = 25;
+
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, TickInterval);
         private readonly DispatcherTimer timer;
 
         private readonly GameManager gameManager;
-    
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainPage" /> class.
+        ///     Initializes a new instance of the <see cref="MainPage" /> class.
         /// </summary>
         public MainPage()
         {
@@ -54,11 +54,10 @@ namespace SpaceInvaders.View
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
 
-            this.timer = new DispatcherTimer { Interval = this.gameTickInterval };
+            this.timer = new DispatcherTimer {Interval = this.gameTickInterval};
 
             this.timer.Tick += this.timerOnTick;
             this.timer.Start();
-
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
 
@@ -73,31 +72,28 @@ namespace SpaceInvaders.View
         private void timerOnTick(object sender, object e)
         {
             this.updateGameStatistics();
-            
         }
-        
+
         private void displayGameOverScreen()
-        {            
+        {
             if (this.gameManager.IsGameOver())
             {
-               int score = this.gameManager.GameScore;
+                var score = this.gameManager.GameScore;
                 var gameOverDialog = new MessageDialog("Game Over\n" + "Your Final score: " + score);
 
                 gameOverDialog.ShowAsync();
                 this.timer.Stop();
-
             }
         }
 
         private void updateGameStatistics()
         {
             this.textBlock.Text = this.gameManager.GameStatistics;
-            
+
             if (this.gameManager.IsGameOver())
             {
                 this.displayGameOverScreen();
             }
-            
         }
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)

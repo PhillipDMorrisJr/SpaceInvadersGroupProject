@@ -1,30 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceInvaders.Model
+﻿namespace SpaceInvaders.Model
 {
-    class Scoreboard
+    internal class Scoreboard
     {
-        private int score;
-        public Scoreboard()
-        {
-            this.score = 0;
-        }
+        #region Data members
 
-        //increase score based on the llevel of the object
-        public void increaseScore(int level)
-        {
-            int scoreValue = (level + 1)*100;
-            this.score += scoreValue;
-        }
+        #endregion
+
         #region Property
 
-        public int Score => this.score;
-#endregion]
+        public int Score { get; private set; }
 
+
+        #endregion
+
+        #region Constructors
+
+        public Scoreboard()
+        {
+            this.Score = 0;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///Increase score based on the llevel of the object
+        /// Precondition: parameter "level" must be greater than 0
+        /// Postcondition: Score is increased based on the given formula
+        /// </summary>
+        public void IncreaseScore(int level)
+        {
+            if (level > 0)
+            {
+                var scoreValue = (level + 1)*100;
+                this.Score += scoreValue;
+            }
+        }
+
+        #endregion
     }
 }

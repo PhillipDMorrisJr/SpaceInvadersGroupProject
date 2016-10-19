@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceInvaders.Model
 {
     public class PlayerShipLives
     {
         #region Data members
-        private List<PlayerShip> lives;
-        private readonly int initialAmountOfLives;
+
         private const int AmountOfBufferShips = 1;
+        private readonly List<PlayerShip> lives;
+        private readonly int initialAmountOfLives;
+
         #endregion
 
+        #region Properties
+
+        public int AmountOfLives => this.lives.Count - AmountOfBufferShips;
+        public bool IsThereAnyLives => this.lives.Count > AmountOfBufferShips;
+
+        #endregion
 
         #region Constructors
 
         public PlayerShipLives() : this(1)
         {
-            
         }
 
         public PlayerShipLives(int amountOfLives)
@@ -30,8 +34,11 @@ namespace SpaceInvaders.Model
             this.initialAmountOfLives = amountOfLives;
             this.lives = new List<PlayerShip>();
             this.addLives(amountOfLives);
-
         }
+
+        #endregion
+
+        #region Methods
 
         private static int addLifeWhenThereAreNoLives(int amountOfLives)
         {
@@ -42,21 +49,18 @@ namespace SpaceInvaders.Model
             return amountOfLives;
         }
 
-        #endregion
-
-        #region Methods
         private void addLives(int lives)
         {
-            PlayerShip initialPlayerShip = new PlayerShip();
+            var initialPlayerShip = new PlayerShip();
             this.lives.Add(initialPlayerShip);
 
-            for (int i = 0; i < lives; i++)
+            for (var i = 0; i < lives; i++)
             {
-                PlayerShip aPlayerShip = new PlayerShip();
+                var aPlayerShip = new PlayerShip();
                 this.lives.Add(aPlayerShip);
             }
 
-            PlayerShip bufferPlayerShip = new PlayerShip();
+            var bufferPlayerShip = new PlayerShip();
             this.lives.Add(bufferPlayerShip);
         }
 
@@ -64,11 +68,10 @@ namespace SpaceInvaders.Model
         {
             if (this.lives.Any())
             {
-                PlayerShip playerShipInUse = this.lives.First();
+                var playerShipInUse = this.lives.First();
                 this.lives.Remove(playerShipInUse);
             }
         }
-
 
         //returns next life in list
         public PlayerShip UseLife()
@@ -88,17 +91,6 @@ namespace SpaceInvaders.Model
             }
         }
 
-
-
         #endregion
-
-        #region Properties
-
-        public int AmountOfLives => this.lives.Count - AmountOfBufferShips;
-        public bool IsThereAnyLives => this.lives.Count > AmountOfBufferShips;
-
-        #endregion
-
-
     }
 }
