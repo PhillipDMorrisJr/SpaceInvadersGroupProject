@@ -37,7 +37,7 @@ namespace SpaceInvaders.Model
         private readonly List<Bullet> enemyAmmo;
 
         private PlayerShip playerShip;
-        private Lives playerLives;
+        private PlayerShipLives playerPlayerShipLives;
         private Canvas currentBackground;
 
         private int enemyMotionCounter;
@@ -73,8 +73,8 @@ namespace SpaceInvaders.Model
             this.gameTimer.Tick += this.gameTimerOnTick;
             this.gameTimer.Start();
 
-            this.playerLives = new Lives(3);
-            this.playerShip = this.playerLives.UseLife();
+            this.playerPlayerShipLives = new PlayerShipLives(3);
+            this.playerShip = this.playerPlayerShipLives.UseLife();
             this.fleet = new Fleet(4);
 
             this.playerAmmo = new List<Bullet>();
@@ -129,9 +129,6 @@ namespace SpaceInvaders.Model
                 isBulletWaiting = bullet.Y < this.playerShip.Y - this.playerShip.SpeedY;
             }
 
-
-
-
             if ((!this.playerAmmo.Any()) || isBulletWaiting)
             {
 
@@ -170,11 +167,11 @@ namespace SpaceInvaders.Model
             this.gameTimer.Stop();
             this.playerShip.Destroyed = true;
 
-            if (this.playerLives.IsThereAnyLives)
+            if (this.playerPlayerShipLives.IsThereAnyLives)
             {
                 if (this.playerShip.Destroyed)
                 {
-                    this.playerShip = this.playerLives.UseLife();
+                    this.playerShip = this.playerPlayerShipLives.UseLife();
                     this.addPlayerShipToGame();
                     this.gameTimer.Start();
                 }
@@ -591,7 +588,7 @@ namespace SpaceInvaders.Model
         /// <returns>return true when the game is over</returns>
         public bool IsGameOver()
         {
-            if (!this.playerLives.IsThereAnyLives || this.areEnemyShipsOutOfPlay())
+            if (!this.playerPlayerShipLives.IsThereAnyLives || this.areEnemyShipsOutOfPlay())
             {
                 return true;
             }
@@ -616,6 +613,7 @@ namespace SpaceInvaders.Model
             {
                 return true;
             }
+
             return gameOver;
         }
 
@@ -631,7 +629,7 @@ namespace SpaceInvaders.Model
 
         private String displayGameStatistics()
         {
-            return "Score: " + this.gameScoreboard.Score + "\n" + "Lives: " + this.playerLives.AmountOfLives;
+            return "Score: " + this.gameScoreboard.Score + "\n" + "Lives: " + this.playerPlayerShipLives.AmountOfLives;
         }
 
 

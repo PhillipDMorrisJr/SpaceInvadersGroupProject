@@ -102,7 +102,7 @@
     <Compile Include="Model\Fleet.cs" />
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
-    <Compile Include="Model\Lives.cs" />
+    <Compile Include="Model\PlayerShipLives.cs" />
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="Model\Scoreboard.cs" />
     <Compile Include="View\MainPage.xaml.cs">

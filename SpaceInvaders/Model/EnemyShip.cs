@@ -42,13 +42,13 @@ namespace SpaceInvaders.Model
             {
                 level = 1;
             }
-
+            this.enemyLevel = level;
             this.timer = new DispatcherTimer { Interval = this.gameTickInterval };
 
             this.timer.Tick += this.timerOnTick;
             this.timer.Start();
 
-            this.enemyLevel = level;
+            
             switch (level)
             {
                     
