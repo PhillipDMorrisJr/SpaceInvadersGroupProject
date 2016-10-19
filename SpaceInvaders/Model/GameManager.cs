@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -247,7 +246,7 @@ namespace SpaceInvaders.Model
                 this.fireMultipleShips(randomizer, firingShips);
             }
         }
-        
+
         private void fireMultipleShips(Random randomizer, List<EnemyShip> firingShips)
         {
             var amountOfShipsToFire = randomizer.Next(firingShips.Count());
@@ -260,7 +259,7 @@ namespace SpaceInvaders.Model
 
         private void fireShipWhenShipHasNotFired(EnemyShip firingShip)
         {
-            bool isEnemyWaiting = false;
+            var isEnemyWaiting = false;
 
             isEnemyWaiting = this.checkIfEnemyIsWaiting(isEnemyWaiting, firingShip);
             if (!this.enemyAmmo.Any() || !isEnemyWaiting)
@@ -270,7 +269,7 @@ namespace SpaceInvaders.Model
             }
         }
 
-private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
+        private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
         {
             if (this.enemyAmmo.Any())
             {
@@ -280,6 +279,7 @@ private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
             }
             return isEnemyWaiting;
         }
+
         private static EnemyShip selectFiringShip(Random randomizer, int amountOfShipsToFire,
             List<EnemyShip> firingShips)
         {
@@ -320,7 +320,6 @@ private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
 
         private void placeEnemyBullet(EnemyShip enemy, Bullet randomBullet)
         {
-            
             randomBullet.X = enemy.X + enemy.Sprite.ActualWidth/2;
             randomBullet.Y = enemy.Y;
         }
@@ -402,7 +401,7 @@ private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
 
         private double calculateEnemyXOrigin(EnemyShip levelOneShip, int enemyRowCount)
         {
-            return this.backgroundWidth* Half - levelOneShip.Width*(enemyRowCount* Half) -
+            return this.backgroundWidth*Half - levelOneShip.Width*(enemyRowCount*Half) -
                    EnemyShipOffset;
         }
 
@@ -461,7 +460,7 @@ private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
 
         private void placePlayerShipNearBottomOfBackgroundCentered()
         {
-            this.playerShip.X = (this.backgroundWidth - this.playerShip.Width)* Half;
+            this.playerShip.X = (this.backgroundWidth - this.playerShip.Width)*Half;
             this.playerShip.Y = this.backgroundHeight - this.playerShip.Height - PlayerShipBottomOffset;
         }
 
@@ -612,7 +611,7 @@ private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
 
         private void placePlayerBullet(Bullet bullet)
         {
-            double halfOfShip = this.playerShip.Sprite.Width* Half;
+            var halfOfShip = this.playerShip.Sprite.Width*Half;
             bullet.X = this.playerShip.X + halfOfShip;
             bullet.Y = this.playerShip.Y;
         }
