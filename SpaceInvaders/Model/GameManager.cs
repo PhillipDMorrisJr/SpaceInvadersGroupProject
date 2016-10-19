@@ -133,13 +133,13 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void FirePlayerBullet()
         {
-            var isBulletWaiting = false;
-            isBulletWaiting = this.checkIfBulletIsWaiting(isBulletWaiting);
-            this.checkIfPlayerAmmoShouldBeStocked(isBulletWaiting);
+            var isPlayerWaiting = false;
+            isPlayerWaiting = this.checkIfPlayerIsWaitingToFire(isPlayerWaiting);
+            this.checkIfPlayerAmmoShouldBeStocked(isPlayerWaiting);
             this.handlePlayerBulletHits();
         }
 
-        private bool checkIfBulletIsWaiting(bool isBulletWaiting)
+        private bool checkIfPlayerIsWaitingToFire(bool isBulletWaiting)
         {
             if (this.playerAmmo.Any())
             {
@@ -247,7 +247,7 @@ namespace SpaceInvaders.Model
                 this.fireMultipleShips(randomizer, firingShips);
             }
         }
-
+        
         private void fireMultipleShips(Random randomizer, List<EnemyShip> firingShips)
         {
             var amountOfShipsToFire = randomizer.Next(firingShips.Count());
@@ -260,13 +260,26 @@ namespace SpaceInvaders.Model
 
         private void fireShipWhenShipHasNotFired(EnemyShip firingShip)
         {
-            if (!firingShip.HasFired)
+            bool isEnemyWaiting = false;
+
+            isEnemyWaiting = this.checkIfEnemyIsWaiting(isEnemyWaiting, firingShip);
+            if (!this.enemyAmmo.Any() || !isEnemyWaiting)
             {
                 this.addEnemyBulletsToScreen(firingShip);
                 firingShip.HasFired = true;
             }
         }
 
+private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
+        {
+            if (this.enemyAmmo.Any())
+            {
+                var bulletClosetToShip = this.enemyAmmo.Max(bullet => bullet.Y + bullet.Height);
+
+                isEnemyWaiting = bulletClosetToShip < enemy.Y - enemy.Height;
+            }
+            return isEnemyWaiting;
+        }
         private static EnemyShip selectFiringShip(Random randomizer, int amountOfShipsToFire,
             List<EnemyShip> firingShips)
         {
