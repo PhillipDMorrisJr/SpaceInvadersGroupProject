@@ -12,14 +12,9 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        /// <summary>
-        ///     The tick interval in seconds
-        /// </summary>
-        public const int TickInterval = 5;
-
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
-        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, TickInterval, 0);
+        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, GameManager.TickInterval, 0);
         private readonly DispatcherTimer timer;
 
         #endregion
@@ -37,7 +32,7 @@ namespace SpaceInvaders.Model
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
+        /// Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
         public PlayerShip()
         {

@@ -5,41 +5,53 @@ using SpaceInvaders.View.Sprites;
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    ///     Manages the EnemyShip class.
+    /// Manages the EnemyShip class.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.GameObject" />
     public class EnemyShip : GameObject
     {
         #region Data members
 
-        /// <summary>
-        ///     The tick interval in seconds
-        /// </summary>
-        public const int TickInterval = 25;
-
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
-        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, TickInterval);
+        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, GameManager.TickInterval);
         private readonly DispatcherTimer timer;
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// Gets the get level.
+        /// </summary>
+        /// <value>
+        /// The get level.
+        /// </value>
         public int GetLevel { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has fired.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has fired; otherwise, <c>false</c>.
+        /// </value>
         public bool HasFired { get; set; }
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EnemyShip"/> class base level 1.
+        /// </summary>
         public EnemyShip() : this(1)
         {
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EnemyShip" /> class.
+        /// Precondition: level must be at least 1.
+        /// Postcondition: new enemyShip created
         /// </summary>
         /// <param name="level">The level.</param>
         public EnemyShip(int level)
