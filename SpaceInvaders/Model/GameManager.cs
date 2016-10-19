@@ -123,21 +123,29 @@ namespace SpaceInvaders.Model
         public void FirePlayerBullet()
         {
             bool isBulletWaiting = false;
-            if (this.playerAmmo.Any())
-            {
-            
-            double bulletClosetToShip = this.playerAmmo.Max(bullet => bullet.Y + bullet.Height);
-
-            isBulletWaiting = bulletClosetToShip > this.playerShip.Y - this.playerShip.Height;
-        }
-
-        if (!this.playerAmmo.Any() || !isBulletWaiting)
-            {
-                this.stockPlayerAmmo();
-                
-            }
+            isBulletWaiting = this.checkIfBulletIsWaiting(isBulletWaiting);
+            this.checkIfPlayerAmmoShouldBeStocked(isBulletWaiting);
             this.handlePlayerBulletHits();
 
+        }
+
+        private bool checkIfBulletIsWaiting(bool isBulletWaiting)
+        {
+            if (this.playerAmmo.Any())
+            {
+                double bulletClosetToShip = this.playerAmmo.Max(bullet => bullet.Y + bullet.Height);
+
+                isBulletWaiting = bulletClosetToShip > this.playerShip.Y - this.playerShip.Height;
+            }
+            return isBulletWaiting;
+        }
+
+        private void checkIfPlayerAmmoShouldBeStocked(bool isBulletWaiting)
+        {
+            if (!this.playerAmmo.Any() || !isBulletWaiting)
+            {
+                this.stockPlayerAmmo();
+            }
         }
 
         /// <summary>
@@ -394,6 +402,7 @@ namespace SpaceInvaders.Model
                 enemyXLocation = enemyXLocation + currentEnemy.Width +
                                  PlayerShipTopOffset;
                 var topCanvasBuffer = 20;
+
                 if (level == 1)
                 {
                     currentEnemy.Y = (topCanvasBuffer + currentEnemy.Height)*this.fleet.AmountOfLevels;
