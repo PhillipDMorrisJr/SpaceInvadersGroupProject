@@ -24,7 +24,7 @@ namespace SpaceInvaders.Model
         #region Property
 
         public int Score => this.score;
-        #endregion]
+#endregion]
 
     }
 }

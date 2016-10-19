@@ -72,7 +72,7 @@ namespace SpaceInvaders.View
 
         private void timerOnTick(object sender, object e)
         {
-            this.updateScoreboard();
+            this.updateGameStatistics();
             
         }
         
@@ -89,10 +89,10 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void updateScoreboard()
+        private void updateGameStatistics()
         {
-            this.textBlock.Text = "Score: " + this.gameManager.GameScore;
-
+            this.textBlock.Text = this.gameManager.GameStatistics;
+            
             if (this.gameManager.IsGameOver())
             {
                 this.displayGameOverScreen();

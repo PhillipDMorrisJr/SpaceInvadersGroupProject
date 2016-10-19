@@ -37,7 +37,7 @@ namespace SpaceInvaders.Model
         private readonly List<Bullet> enemyAmmo;
 
         private PlayerShip playerShip;
-        private List<PlayerShip> lives;
+        private List<PlayerShip> playerLives;
         private Canvas currentBackground;
 
         private int enemyMotionCounter;
@@ -73,7 +73,7 @@ namespace SpaceInvaders.Model
             this.gameTimer.Tick += this.gameTimerOnTick;
             this.gameTimer.Start();
 
-            this.lives = new List<PlayerShip>();
+            this.playerLives = new List<PlayerShip>();
             this.addPlayerLives(3);
 
             this.fleet = new Fleet(4);
@@ -113,7 +113,7 @@ namespace SpaceInvaders.Model
             for (int i = 0; i < lives; i++)
             {
                 PlayerShip aPlayerShip = new PlayerShip();
-                this.lives.Add(aPlayerShip);
+                this.playerLives.Add(aPlayerShip);
 
             }
         }
@@ -174,11 +174,11 @@ namespace SpaceInvaders.Model
                 this.currentBackground.Children.Remove(enemyBullet.Sprite);
 
                 this.enemyAmmo.Remove(enemyBullet);
-                this.lives.Remove(this.playerShip);
+                this.playerLives.Remove(this.playerShip);
                 this.gameTimer.Stop();
                 this.playerShip.Destroyed = true;
 
-                if (this.lives.Any())
+                if (this.playerLives.Any())
                 {
                     if (this.playerShip.Destroyed)
                     {
@@ -322,9 +322,9 @@ namespace SpaceInvaders.Model
 
         private void addPlayerShipToGame()
         {
-            if (this.lives.Any())
+            if (this.playerLives.Any())
             {
-                this.playerShip = this.lives.First();
+                this.playerShip = this.playerLives.First();
                 this.currentBackground.Children.Add(this.playerShip.Sprite);
 
                 this.placePlayerShipNearBottomOfBackgroundCentered();
@@ -609,7 +609,7 @@ namespace SpaceInvaders.Model
 
         private bool isPlayerOutOfLives()
         {
-            if (!this.lives.Any())
+            if (!this.playerLives.Any())
             {
                 return true;
             }
@@ -634,11 +634,20 @@ namespace SpaceInvaders.Model
                 this.gameTimer.Stop();
             }
         }
+
+
+        private String displayGameStatistics()
+        {
+            return "Score: " + this.gameScoreboard.Score + "\n" + "Lives: " + this.playerLives.Count;
+        }
+
+
         #endregion
 
 
 
         #region Property
+        public String GameStatistics => this.displayGameStatistics();
         public int GameScore => this.gameScoreboard.Score;
 
         #endregion
