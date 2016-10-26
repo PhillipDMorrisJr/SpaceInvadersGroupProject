@@ -13,25 +13,23 @@ namespace SpaceInvaders.Model
 
         private const int AmountOfBufferShips = 1;
         private readonly List<PlayerShip> lives;
-        private readonly int initialAmountOfLives;
-
         #endregion
 
         #region Properties
 
         /// <summary>
-        ///     Gets the amount of lives.
+        ///     Gets the amount of amountOfLives.
         /// </summary>
         /// <value>
-        ///     The amount of lives.
+        ///     The amount of amountOfLives.
         /// </value>
         public int AmountOfLives => this.lives.Count - AmountOfBufferShips;
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is there any lives.
+        ///     Gets a value indicating whether this instance is there any amountOfLives.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this instance is there any lives; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is there any amountOfLives; otherwise, <c>false</c>.
         /// </value>
         public bool IsThereAnyLives => this.lives.Count > AmountOfBufferShips;
 
@@ -49,12 +47,11 @@ namespace SpaceInvaders.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerShipLives" /> class.
         /// </summary>
-        /// <param name="amountOfLives">The amount of lives.</param>
+        /// <param name="amountOfLives">The amount of amountOfLives.</param>
         public PlayerShipLives(int amountOfLives)
         {
             amountOfLives = addLifeWhenThereAreNoLives(amountOfLives);
 
-            this.initialAmountOfLives = amountOfLives;
             this.lives = new List<PlayerShip>();
             this.addLives(amountOfLives);
         }
@@ -72,12 +69,12 @@ namespace SpaceInvaders.Model
             return amountOfLives;
         }
 
-        private void addLives(int lives)
+        private void addLives(int amountOfLives)
         {
             var initialPlayerShip = new PlayerShip();
             this.lives.Add(initialPlayerShip);
 
-            for (var i = 0; i < lives; i++)
+            for (var i = 0; i < amountOfLives; i++)
             {
                 var aPlayerShip = new PlayerShip();
                 this.lives.Add(aPlayerShip);
@@ -98,8 +95,8 @@ namespace SpaceInvaders.Model
 
         /// <summary>
         ///     Uses the life and removes playerShip from PlayerShipLives.
-        ///     Precondition: there must be lives left.
-        ///     Postcondition: There are less lives.
+        ///     Precondition: there must be amountOfLives left.
+        ///     Postcondition: There are less amountOfLives.
         /// </summary>
         /// <returns>An unused playerShip</returns>
         public PlayerShip UseLife()
@@ -115,7 +112,7 @@ namespace SpaceInvaders.Model
         {
             if (!this.lives.Any())
             {
-                throw new InvalidOperationException("There are no more lives.");
+                throw new InvalidOperationException("There are no more amountOfLives.");
             }
         }
 

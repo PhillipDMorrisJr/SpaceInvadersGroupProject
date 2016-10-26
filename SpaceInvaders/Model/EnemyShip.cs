@@ -15,7 +15,6 @@ namespace SpaceInvaders.Model
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, GameManager.TickInterval);
-        private readonly DispatcherTimer timer;
 
         #endregion
 
@@ -55,16 +54,15 @@ namespace SpaceInvaders.Model
         /// </summary>
         /// <param name="level">The level.</param>
         public EnemyShip(int level)
-        {
-            if (level < 1)
+        {            if (level < 1)
             {
                 level = 1;
             }
             this.GetLevel = level;
-            this.timer = new DispatcherTimer {Interval = this.gameTickInterval};
+            DispatcherTimer timer = new DispatcherTimer {Interval = this.gameTickInterval};
 
-            this.timer.Tick += this.timerOnTick;
-            this.timer.Start();
+            timer.Tick += this.timerOnTick;
+            timer.Start();
 
             switch (level)
             {

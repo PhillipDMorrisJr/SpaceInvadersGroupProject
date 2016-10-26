@@ -8,9 +8,8 @@ namespace SpaceInvaders.View.Sprites
     ///     Draws a player ship.
     ///     Must implemente the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
-    /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class PlayerShipSprite : UserControl, ISpriteRenderer
+    public sealed partial class PlayerShipSprite : ISpriteRenderer
     {
         #region Constructors
 

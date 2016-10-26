@@ -10,7 +10,7 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class BulletSprite : UserControl, ISpriteRenderer
+    public sealed partial class BulletSprite : ISpriteRenderer
     {
         #region Constructors
 
@@ -29,7 +29,7 @@ namespace SpaceInvaders.View.Sprites
         #region Methods
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PlayerBulletSprite" /> class.
+        ///     Initializes a new instance of the PlayerBulletSprite class.
         ///     Precondition: none
         ///     Postconditon: PlayerBulletSprite Sprite created.
         /// </summary>

@@ -8,9 +8,8 @@ namespace SpaceInvaders.View.Sprites
     ///     Draws a Level 3 ship.
     ///     Must implemente the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
-    /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level3EnemyShipSprite : UserControl, ISpriteRenderer
+    public sealed partial class Level3EnemyShipSprite : ISpriteRenderer
     {
         #region Constructors
 
