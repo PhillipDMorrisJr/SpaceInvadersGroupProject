@@ -6,21 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    d:DesignHeight="30"
     d:DesignWidth="50"
-    Height="54.333"
+    Height="30"
     Width="50">
 
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="SaucerColor" Color="Orange" />
-        <SolidColorBrush x:Key="EnemyShipColor" Color="Red" />
-    </UserControl.Resources>
-
     <Canvas>
-        <Rectangle Width="7" Height="44" Fill="{StaticResource SaucerColor}" Canvas.Top="2" Canvas.Left="22" />
-        <Rectangle Width="2.1" Height="49" Fill="{StaticResource SaucerColor}" Canvas.Top="4" Canvas.Left="24.3" />
-        <local:Level1EnemyShipSprite HorizontalAlignment="Left" Height="33.3333320617676" VerticalAlignment="Top"
-                                     Width="50" Loaded="Level1EnemyShipSprite_Loaded" Canvas.Top="-4" />
-
+        <local:Level1EnemyShipSprite/>
+        </>
     </Canvas>
 
 </UserControl>
