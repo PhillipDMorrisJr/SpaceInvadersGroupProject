@@ -1,0 +1,5 @@
+The methods private void killEnemiesWhenTheyAreHit(List<EnemyShip> enemyLevel){...} is not refractored. 
+
+Also, when the game ends you have to restart the program.
+
+
