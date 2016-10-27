@@ -22,11 +22,11 @@
         <Ellipse x:Name="light1" Canvas.Top="17" Canvas.Left="4" Style="{StaticResource EnemyShipLights}"
                  RenderTransformOrigin="0.111,0.444" Fill="{StaticResource level1ShipLightsColor}"/>
         <Ellipse x:Name="light2" Canvas.Top="17" Canvas.Left="16" Style="{StaticResource EnemyShipLights}"
-                 RenderTransformOrigin="1.333,1.889" Fill="Chartreuse"/>
+                 RenderTransformOrigin="1.333,1.889" Fill="{StaticResource level1ShipLightsColor}"/>
         <Ellipse x:Name="light3" Canvas.Top="17" Canvas.Left="29" Style="{StaticResource EnemyShipLights}"
-                 RenderTransformOrigin="1.056,1.333" Fill="Chartreuse"/>
+                 RenderTransformOrigin="1.056,1.333" Fill="{StaticResource level1ShipLightsColor}"/>
         <Ellipse x:Name="light4" Canvas.Top="17" Canvas.Left="42" Style="{StaticResource EnemyShipLights}"
-                 RenderTransformOrigin="14,7.333" Fill="Chartreuse"/>
+                 RenderTransformOrigin="14,7.333" Fill="{StaticResource level1ShipLightsColor}"/>
         <Rectangle Width="35" Height="4" Canvas.Top="22" Canvas.Left="7" Fill="{StaticResource EnemyShipBaseColor}" />
     </Canvas>
 </UserControl>
