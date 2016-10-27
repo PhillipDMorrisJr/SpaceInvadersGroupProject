@@ -105,6 +105,7 @@
     <Compile Include="Model\PlayerShipLives.cs" />
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="Model\Scoreboard.cs" />
+    <Compile Include="Util\TimerUtil.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

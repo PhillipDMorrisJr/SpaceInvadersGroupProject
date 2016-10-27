@@ -6,18 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    d:DesignHeight="30"
     d:DesignWidth="50"
-    Height="57.667"
+    Height="30"
     Width="50">
 
-    <Canvas Margin="0,0,-16,-26.667" Height="60" VerticalAlignment="Top" HorizontalAlignment="Right" Width="66">
-        <Image x:Name="image" Height="57.685" Width="104.21"
-               Source="http://3.bp.blogspot.com/-cg1jtrxaZ8Y/Ufl5SmFUVaI/AAAAAAAAAzY/KBxNVcMmOB0/s1600/F5S4.png"
-               RenderTransformOrigin="0.5,0.5" Canvas.Left="-26.543" Canvas.Top="1.521" UseLayoutRounding="False"
-               d:LayoutRounding="Auto">
-            <Image.RenderTransform>
-                <CompositeTransform Rotation="180.593" />
-            </Image.RenderTransform>
-        </Image>
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="EnemyShipBaseColor" Color="Blue" />
+        <SolidColorBrush x:Key="EnemyDomeColor" Color="Gainsboro" />
+        <Style x:Key="EnemyShipLights" TargetType="Ellipse">
+            <Setter Property="Width" Value="3" />
+            <Setter Property="Height" Value="3" />
+            <Setter Property="Fill" Value="Chartreuse" />
+        </Style>
+    </UserControl.Resources>
+
+    <Canvas x:Name="enemyShipLevel1">
+        <Ellipse x:Name="domeTop" Width="35" Height="26" Canvas.Top="0" Canvas.Left="7" Fill="{StaticResource EnemyDomeColor}" />
+        <Ellipse Width="50" Height="15" Canvas.Top="11" Fill="{StaticResource EnemyShipBaseColor}" />
+        <Ellipse x:Name="domeBottom" Width="35" Height="5" Canvas.Top="10" Canvas.Left="7" Fill="{StaticResource EnemyDomeColor}" />
+        <Ellipse x:Name="light1" Canvas.Top="17" Canvas.Left="4" Style="{StaticResource EnemyShipLights}"
+                 RenderTransformOrigin="0.111,0.444" />
+        <Ellipse x:Name="light2" Canvas.Top="17" Canvas.Left="16" Style="{StaticResource EnemyShipLights}"
+                 RenderTransformOrigin="1.333,1.889" />
+        <Ellipse x:Name="light3" Canvas.Top="17" Canvas.Left="29" Style="{StaticResource EnemyShipLights}"
+                 RenderTransformOrigin="1.056,1.333" />
+        <Ellipse x:Name="light4" Canvas.Top="17" Canvas.Left="42" Style="{StaticResource EnemyShipLights}"
+                 RenderTransformOrigin="14,7.333" />
+        <Rectangle Width="35" Height="4" Canvas.Top="22" Canvas.Left="7" Fill="{StaticResource EnemyShipBaseColor}" />
     </Canvas>
 </UserControl>
