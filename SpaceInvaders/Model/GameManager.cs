@@ -27,17 +27,17 @@ namespace SpaceInvaders.Model
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, TickInterval);
         private DispatcherTimer gameTimer;
 
-        private readonly EnemyFleet fleet;
+        private EnemyFleet fleet;
 
-        private readonly List<Bullet> playerAmmo;
-        private readonly List<Bullet> enemyAmmo;
+        private List<Bullet> playerAmmo;
+        private List<Bullet> enemyAmmo;
 
         private PlayerShip playerShip;
-        private readonly PlayerShipFactory playerPlayerShipFactory;
+        private PlayerShipFactory playerPlayerShipFactory;
         private Canvas currentBackground;
 
         private int enemyMotionCounter;
-        private readonly Scoreboard gameScoreboard;
+        private Scoreboard gameScoreboard;
 
         #endregion
 
@@ -72,19 +72,29 @@ namespace SpaceInvaders.Model
             this.backgroundWidth = backgroundWidth;
             
 
-            this.playerPlayerShipFactory = new PlayerShipFactory(3);
-            this.playerShip = this.playerPlayerShipFactory.UseLife();
+            this.initializePlayerShipFactory();
 
-            this.fleet = new EnemyFleet(7);
+            this.fleet = new EnemyFleet(4);
 
-            this.playerAmmo = new List<Bullet>();
-            this.enemyAmmo = new List<Bullet>();
-
-            this.gameScoreboard = new Scoreboard();
+            this.initializeDataMembers();
 
             this.enemyMotionCounter = 0;
 
             this.initializeTimer();  
+        }
+
+        private void initializeDataMembers()
+        {
+            this.playerAmmo = new List<Bullet>();
+            this.enemyAmmo = new List<Bullet>();
+
+            this.gameScoreboard = new Scoreboard();
+        }
+
+        private void initializePlayerShipFactory()
+        {
+            this.playerPlayerShipFactory = new PlayerShipFactory(3);
+            this.playerShip = this.playerPlayerShipFactory.UseLife();
         }
 
         #endregion
@@ -393,7 +403,7 @@ namespace SpaceInvaders.Model
 
         private void placeEnemyShipsNearTopOfBackgroundCentered()
         {
-            for (var levelIterator = 1; levelIterator <= this.fleet.AmountOfLevels; levelIterator++)
+            for (var levelIterator = 1; levelIterator <= this.fleet.Levels; levelIterator++)
             {
                 
                 var enemyRowCount = this.fleet.GetAmountOfShipForLevel(levelIterator);
@@ -673,8 +683,16 @@ namespace SpaceInvaders.Model
         /// <returns>return true when the game is over</returns>
         public bool IsGameOver()
         {
+            
             if (!this.playerPlayerShipFactory.IsThereAnyLives || this.areEnemyShipsOutOfPlay())
             {
+                if (this.fleet.Levels < 7)
+                {
+                    this.resetCanvas();
+                    this.gameTimer.Stop();
+                    this.goToNextRound();
+                    return false;
+                }
                 return true;
             }
             return false;
@@ -698,6 +716,20 @@ namespace SpaceInvaders.Model
                 this.resetCanvas();
                 this.gameTimer.Stop();
             }
+        }
+
+        private void goToNextRound()
+        {
+            this.initializePlayerShipFactory();
+
+            this.fleet = new EnemyFleet(this.fleet.Levels + 1);
+
+            this.initializeDataMembers();
+
+            this.enemyMotionCounter = 0;
+
+            this.initializeTimer();
+            this.InitializeGame(this.currentBackground);
         }
 
         private string displayGameStatistics()

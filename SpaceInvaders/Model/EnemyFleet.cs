@@ -28,7 +28,7 @@ namespace SpaceInvaders.Model
             {
                 levels = 1;
             }
-            this.AmountOfLevels = levels;
+            this.Levels = levels;
             this.Fleet = new List<List<EnemyShip>>();
 
             this.addShipsToFleet(levels);
@@ -173,7 +173,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The amount of levels.
         /// </value>
-        public int AmountOfLevels { get; }
+        public int Levels { get; }
 
         /// <summary>
         ///     Gets the entire fleet.
