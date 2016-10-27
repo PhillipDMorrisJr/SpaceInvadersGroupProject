@@ -90,14 +90,13 @@ namespace SpaceInvaders.Model
         /// <returns>List of ships that can fire</returns>
         public List<EnemyShip> GetFiringShips()
         {
-            var firingShips = new List<EnemyShip>();
-            var levelThree = 3;
+            List<EnemyShip> firingShips = new List<EnemyShip>();
 
             foreach (var enemyRows in this.Fleet)
             {
                 foreach (var enemy in enemyRows)
                 {
-                    if (enemy.GetLevel >= levelThree)
+                    if (enemy.Level >= 3)
                     {
                         firingShips.Add(enemy);
                     }
@@ -121,7 +120,7 @@ namespace SpaceInvaders.Model
             {
                 foreach (var enemy in enemyRows)
                 {
-                    if (enemy.GetLevel == level)
+                    if (enemy.Level == level)
                     {
                         currentLevelShips.Add(enemy);
                     }

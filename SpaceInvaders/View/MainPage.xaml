@@ -7,11 +7,11 @@
     xmlns:sprites="using:SpaceInvaders.View.Sprites"
     mc:Ignorable="d">
 
-    <Canvas x:Name="theCanvas" Width="640" Height="480">
+    <Canvas x:Name="theCanvas" Width="1080" Height="720">
         <Image Source="https://static3.scirra.net/images/newstore/products/112/splash.png"
-               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="1990" Width="1380" Canvas.Left="-220"
-               Canvas.Top="-770" />
-        <TextBlock x:Name="textBlock" Canvas.Left="518" TextWrapping="Wrap" Canvas.Top="10" Height="39" Width="112"
+               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="2604" Width="2322" Canvas.Left="-736"
+               Canvas.Top="-982" />
+        <TextBlock x:Name="textBlock" Canvas.Left="1078" TextWrapping="Wrap" Canvas.Top="725" Height="39" Width="112"
                    Foreground="Cyan" />
     </Canvas>
 </Page>

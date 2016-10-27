@@ -15,6 +15,7 @@
                Source="http://3.bp.blogspot.com/-cg1jtrxaZ8Y/Ufl5SmFUVaI/AAAAAAAAAzY/KBxNVcMmOB0/s1600/F5S4.png"
                RenderTransformOrigin="0.5,0.5" Canvas.Left="-26.543" Canvas.Top="1.521" UseLayoutRounding="False"
                d:LayoutRounding="Auto">
+            
             <Image.RenderTransform>
                 <CompositeTransform Rotation="180.593" />
             </Image.RenderTransform>
