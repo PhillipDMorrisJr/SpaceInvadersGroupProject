@@ -113,7 +113,7 @@ namespace SpaceInvaders.View
                     if (!this.gameManager.IsGameOver())
                     {
                         this.gameManager.FirePlayerBullet();
-                    }
+}
                     break;
             }
         }

@@ -26,7 +26,7 @@ namespace SpaceInvaders.Model
         private readonly double backgroundWidth;
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, TickInterval);
         private DispatcherTimer gameTimer;
-
+        private int currentLevel;
         private EnemyFleet fleet;
 
         private List<Bullet> playerAmmo;
@@ -68,6 +68,7 @@ namespace SpaceInvaders.Model
                 throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
             }
 
+            this.currentLevel = 0;
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             
@@ -686,9 +687,9 @@ namespace SpaceInvaders.Model
             
             if (!this.playerPlayerShipFactory.IsThereAnyLives || this.areEnemyShipsOutOfPlay())
             {
-                if (this.fleet.Levels < 7)
+                if (this.currentLevel < 3 && this.playerPlayerShipFactory.IsThereAnyLives)
                 {
-                    this.resetCanvas();
+                    this.currentLevel++;
                     this.gameTimer.Stop();
                     this.goToNextRound();
                     return false;
@@ -720,6 +721,8 @@ namespace SpaceInvaders.Model
 
         private void goToNextRound()
         {
+            this.resetCanvas();
+
             this.initializePlayerShipFactory();
 
             this.fleet = new EnemyFleet(this.fleet.Levels + 1);
@@ -754,7 +757,7 @@ namespace SpaceInvaders.Model
         private void clearPlayerBullets()
         {
 
-            List<Bullet> playerBulletsToRemove = new List<Bullet>(this.enemyAmmo);
+            List<Bullet> playerBulletsToRemove = new List<Bullet>(this.playerAmmo);
             foreach (var bullet in playerBulletsToRemove)
             {
                 this.removeBulletFromGame(bullet);
