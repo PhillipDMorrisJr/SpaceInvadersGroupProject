@@ -21,12 +21,12 @@ namespace SpaceInvaders.View
         /// <summary>
         ///     The application height
         /// </summary>
-        public const double ApplicationHeight = 480;
+        public const double ApplicationHeight = 720;
 
         /// <summary>
         ///     The application width
         /// </summary>
-        public const double ApplicationWidth = 640;
+        public const double ApplicationWidth = 1080;
 
         /// <summary>
         ///     The tick interval in milliseconds
@@ -58,10 +58,13 @@ namespace SpaceInvaders.View
             this.timer.Tick += this.timerOnTick;
             this.timer.Start();
 
-            Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
+
+
+                Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
+            
+
         }
 
         #endregion
@@ -97,6 +100,7 @@ namespace SpaceInvaders.View
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
+
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
@@ -106,7 +110,10 @@ namespace SpaceInvaders.View
                     this.gameManager.MovePlayerShipRight();
                     break;
                 case VirtualKey.Space:
-                    this.gameManager.FirePlayerBullet();
+                    if (!this.gameManager.IsGameOver())
+                    {
+                        this.gameManager.FirePlayerBullet();
+}
                     break;
             }
         }
