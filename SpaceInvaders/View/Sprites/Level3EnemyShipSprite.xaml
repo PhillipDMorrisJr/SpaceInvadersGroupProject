@@ -6,19 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    d:DesignHeight="30"
     d:DesignWidth="50"
-    Height="50.333"
+    Height="30"
     Width="50">
 
     <Canvas>
-        <Image x:Name="image" Height="46.29" Width="90.965"
-               Source="http://2.bp.blogspot.com/-0RjklQJvRyg/VllqvSo-u1I/AAAAAAAACHU/J-MkW3RuB_4/s1600/spco.png"
-               RenderTransformOrigin="0.5,0.5" Canvas.Left="-20.023" Canvas.Top="1.949" UseLayoutRounding="False"
-               d:LayoutRounding="Auto">
-            <Image.RenderTransform>
-                <CompositeTransform Rotation="180.593" />
-            </Image.RenderTransform>
-        </Image>
-
+        <local:Level1EnemyShipSprite />
+        <Ellipse Style="{StaticResource Light1}" Fill="{StaticResource Level3ShipLightsColor}"/>
+        <Ellipse Style="{StaticResource Light2}" Fill="{StaticResource Level3ShipLightsColor}"/>
+        <Ellipse Style="{StaticResource Light3}" Fill="{StaticResource Level3ShipLightsColor}"/>
+        <Ellipse Style="{StaticResource Light4}" Fill="{StaticResource Level3ShipLightsColor}"/>
+        <Rectangle Canvas.Left="9" Style="{StaticResource EnemyShipGuns}" />
+        <Rectangle Canvas.Left="29" Style="{StaticResource EnemyShipGuns}" />
     </Canvas>
 </UserControl>
