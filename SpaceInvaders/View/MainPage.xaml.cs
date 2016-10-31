@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
@@ -100,21 +101,60 @@ namespace SpaceInvaders.View
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
-
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
-                    this.gameManager.MovePlayerShipLeft();
-                    break;
-                case VirtualKey.Right:
-                    this.gameManager.MovePlayerShipRight();
-                    break;
-                case VirtualKey.Space:
-                    if (!this.gameManager.IsGameOver())
+                    if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Space) & CoreVirtualKeyStates.Down) != 0)
                     {
-                        this.gameManager.FirePlayerBullet();
-}
+                        this.gameManager.MovePlayerShipLeft();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else
+                    {
+                        this.gameManager.MovePlayerShipLeft();
+                    }
                     break;
+
+
+                case VirtualKey.Right:
+                    if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Space) & CoreVirtualKeyStates.Down) != 0)
+                    {
+                        this.gameManager.MovePlayerShipRight();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else
+                    {
+                        this.gameManager.MovePlayerShipRight();
+                    }
+                    
+                    break;
+
+                case VirtualKey.Space:
+                    if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Right) & CoreVirtualKeyStates.Down) != 0)
+                    {
+                        this.gameManager.MovePlayerShipRight();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Left) & CoreVirtualKeyStates.Down) !=
+                             0)
+                    {
+                        this.gameManager.MovePlayerShipLeft();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else
+                    {
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+
+                    break;
+            }
+        }
+
+        private void fireBulltWhenGameIsNotOver()
+        {
+            if (!this.gameManager.IsGameOver())
+            {
+                this.gameManager.FirePlayerBullet();
             }
         }
 
