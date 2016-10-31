@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<local:AbstractUserControl
     x:Class="SpaceInvaders.View.Sprites.Level2EnemyShipSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,4 +20,4 @@
         <Rectangle Style="{StaticResource EnemyShipGuns}" Canvas.Left="19" />
     </Canvas>
 
-</UserControl>
+</local:AbstractUserControl>

@@ -11,7 +11,7 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level2EnemyShipSprite : UserControl, ISpriteRenderer
+    public sealed partial class Level2EnemyShipSprite : AbstractUserControl
     {
         #region Constructors
 
@@ -29,22 +29,7 @@ namespace SpaceInvaders.View.Sprites
 
         #region Methods
 
-        /// <summary>
-        ///     Renders the sprite at the specified location.
-        ///     Precondition: none
-        ///     Postcondition: sprite drawn at location (x,y)
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public void RenderAt(double x, double y)
-        {
-            Canvas.SetLeft(this, x);
-            Canvas.SetTop(this, y);
-        }
-
-        private void Level1EnemyShipSprite_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
+        
 
         #endregion
     }

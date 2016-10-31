@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<local:AbstractUserControl
     x:Class="SpaceInvaders.View.Sprites.Level1EnemyShipSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,4 +21,4 @@
         <Ellipse Style="{StaticResource Light4}" Fill="{StaticResource Level1ShipLightsColor}"/>
         <Rectangle Width="35" Height="4" Canvas.Top="22" Canvas.Left="7" Fill="{StaticResource EnemyShipBaseColor}" />
     </Canvas>
-</UserControl>
+</local:AbstractUserControl>

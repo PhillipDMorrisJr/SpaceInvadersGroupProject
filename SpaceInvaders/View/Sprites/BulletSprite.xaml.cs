@@ -1,12 +1,8 @@
-﻿using Windows.UI.Xaml.Markup;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace SpaceInvaders.View.Sprites
+﻿namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
     /// Draws a player bullet.
-    /// Must implemente the ISpriteRenderer so will be displayed as a game object.
+    /// Must implement the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
     public sealed partial class BulletSprite : AbstractUserControl
     {

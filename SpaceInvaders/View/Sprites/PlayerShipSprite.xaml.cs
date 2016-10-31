@@ -1,8 +1,4 @@
-﻿using SpaceInvaders.View.Sprites;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace SpaceInvaders.View.Sprites
+﻿namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
     ///     Draws a player ship.
