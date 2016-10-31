@@ -1,4 +1,4 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using SpaceInvaders.View.Sprites;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -8,9 +8,7 @@ namespace SpaceInvaders.View.Sprites
     ///     Draws a player ship.
     ///     Must implemente the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
-    /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
-    /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class PlayerShipSprite : UserControl, ISpriteRenderer
+    public sealed partial class PlayerShipSprite : AbstractUserControl
     {
         #region Constructors
 
@@ -26,21 +24,6 @@ namespace SpaceInvaders.View.Sprites
 
         #endregion
 
-        #region Methods
-
-        /// <summary>
-        ///     Renders the sprite at the specified location.
-        ///     Precondition: none
-        ///     Postcondition: sprite drawn at location (x,y)
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public void RenderAt(double x, double y)
-        {
-            Canvas.SetLeft(this, x);
-            Canvas.SetTop(this, y);
-        }
-
-        #endregion
+        
     }
 }

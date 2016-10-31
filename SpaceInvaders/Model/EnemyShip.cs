@@ -14,8 +14,6 @@ namespace SpaceInvaders.Model
 
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
-        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, GameManager.TickInterval);
-        private readonly DispatcherTimer timer;
 
         #endregion
 
@@ -61,11 +59,7 @@ namespace SpaceInvaders.Model
                 level = 1;
             }
             this.GetLevel = level;
-            this.timer = new DispatcherTimer {Interval = this.gameTickInterval};
-
-            this.timer.Tick += this.timerOnTick;
-            this.timer.Start();
-
+            
             switch (level)
             {
                 case 1:
@@ -91,22 +85,7 @@ namespace SpaceInvaders.Model
 
         #region Methods
 
-        private void timerOnTick(object sender, object e)
-        {
-            if (this.HasFired)
-            {
-                this.HasFired = false;
-            }
-
-            if (Sprite.Visibility == Visibility.Collapsed)
-            {
-                Sprite.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Sprite.Visibility = Visibility.Collapsed;
-            }
-        }
+        
 
         #endregion
     }
