@@ -1,6 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {

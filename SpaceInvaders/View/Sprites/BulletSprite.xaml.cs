@@ -4,7 +4,7 @@
     /// Draws a player bullet.
     /// Must implement the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
-    public sealed partial class BulletSprite : AbstractUserControl
+    public sealed partial class BulletSprite
     {
         #region Constructors
 

@@ -1,5 +1,4 @@
 ﻿using Windows.UI;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using SpaceInvaders.Util;
 
@@ -13,7 +12,7 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level1EnemyShipSprite : AbstractUserControl
+    public sealed partial class Level1EnemyShipSprite
     {
         #region Constructors
 

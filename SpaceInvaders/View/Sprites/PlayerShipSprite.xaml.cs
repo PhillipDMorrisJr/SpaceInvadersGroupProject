@@ -4,7 +4,7 @@
     ///     Draws a player ship.
     ///     Must implemente the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
-    public sealed partial class PlayerShipSprite : AbstractUserControl
+    public sealed partial class PlayerShipSprite
     {
         #region Constructors
 

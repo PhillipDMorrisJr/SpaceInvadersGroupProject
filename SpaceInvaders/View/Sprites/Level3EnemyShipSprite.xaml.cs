@@ -10,7 +10,7 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level3EnemyShipSprite : AbstractUserControl
+    public sealed partial class Level3EnemyShipSprite
     {
         #region Constructors
 

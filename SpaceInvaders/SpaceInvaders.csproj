@@ -97,6 +97,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Barrier.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\EnemyShip.cs" />
     <Compile Include="Model\EnemyFleet.cs" />
