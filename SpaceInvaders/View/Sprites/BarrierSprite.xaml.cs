@@ -9,7 +9,11 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     public sealed partial class BarrierSprite
     {
+        #region Data members
+
         private readonly List<Rectangle> barrierPiecesList;
+
+        #endregion
 
         #region Constructors
 
@@ -21,8 +25,8 @@ namespace SpaceInvaders.View.Sprites
         public BarrierSprite()
         {
             this.InitializeComponent();
-            barrierPiecesList = new List<Rectangle>();
-            addAllBarrierPieces();
+            this.barrierPiecesList = new List<Rectangle>();
+            this.addAllBarrierPieces();
         }
 
         #endregion
@@ -31,70 +35,70 @@ namespace SpaceInvaders.View.Sprites
 
         private void addAllBarrierPieces()
         {
-            addTopLeftToList();
-            addTopMiddleToList();
-            addTopRightToList();
-            addBottomLeftToList();
-            addBottomMiddleToList();
-            addBottomRightToList();
+            this.addTopLeftToList();
+            this.addTopMiddleToList();
+            this.addTopRightToList();
+            this.addBottomLeftToList();
+            this.addBottomMiddleToList();
+            this.addBottomRightToList();
         }
 
         private void addBottomRightToList()
         {
-            barrierPiecesList.Add(bottomRight1);
-            barrierPiecesList.Add(bottomRight2);
-            barrierPiecesList.Add(bottomRight3);
-            barrierPiecesList.Add(bottomRight4);
-            barrierPiecesList.Add(bottomRight5);
-            barrierPiecesList.Add(bottomRight6);
+            this.barrierPiecesList.Add(this.bottomRight1);
+            this.barrierPiecesList.Add(this.bottomRight2);
+            this.barrierPiecesList.Add(this.bottomRight3);
+            this.barrierPiecesList.Add(this.bottomRight4);
+            this.barrierPiecesList.Add(this.bottomRight5);
+            this.barrierPiecesList.Add(this.bottomRight6);
         }
 
         private void addBottomMiddleToList()
         {
-            barrierPiecesList.Add(bottomMiddle1);
-            barrierPiecesList.Add(bottomMiddle2);
-            barrierPiecesList.Add(bottomMiddle3);
-            barrierPiecesList.Add(bottomMiddle4);
-            barrierPiecesList.Add(bottomMiddle5);
+            this.barrierPiecesList.Add(this.bottomMiddle1);
+            this.barrierPiecesList.Add(this.bottomMiddle2);
+            this.barrierPiecesList.Add(this.bottomMiddle3);
+            this.barrierPiecesList.Add(this.bottomMiddle4);
+            this.barrierPiecesList.Add(this.bottomMiddle5);
         }
 
         private void addBottomLeftToList()
         {
-            barrierPiecesList.Add(bottomLeft1);
-            barrierPiecesList.Add(bottomLeft2);
-            barrierPiecesList.Add(bottomLeft3);
-            barrierPiecesList.Add(bottomLeft4);
-            barrierPiecesList.Add(bottomLeft5);
+            this.barrierPiecesList.Add(this.bottomLeft1);
+            this.barrierPiecesList.Add(this.bottomLeft2);
+            this.barrierPiecesList.Add(this.bottomLeft3);
+            this.barrierPiecesList.Add(this.bottomLeft4);
+            this.barrierPiecesList.Add(this.bottomLeft5);
         }
 
         private void addTopRightToList()
         {
-            barrierPiecesList.Add(topRight1);
-            barrierPiecesList.Add(topRight2);
-            barrierPiecesList.Add(topRight3);
-            barrierPiecesList.Add(topRight4);
-            barrierPiecesList.Add(topRight5);
-            barrierPiecesList.Add(topRight6);
+            this.barrierPiecesList.Add(this.topRight1);
+            this.barrierPiecesList.Add(this.topRight2);
+            this.barrierPiecesList.Add(this.topRight3);
+            this.barrierPiecesList.Add(this.topRight4);
+            this.barrierPiecesList.Add(this.topRight5);
+            this.barrierPiecesList.Add(this.topRight6);
         }
 
         private void addTopMiddleToList()
         {
-            barrierPiecesList.Add(topMiddle1);
-            barrierPiecesList.Add(topMiddle2);
-            barrierPiecesList.Add(topMiddle3);
-            barrierPiecesList.Add(topMiddle4);
-            barrierPiecesList.Add(topMiddle5);
-            barrierPiecesList.Add(topMiddle6);
+            this.barrierPiecesList.Add(this.topMiddle1);
+            this.barrierPiecesList.Add(this.topMiddle2);
+            this.barrierPiecesList.Add(this.topMiddle3);
+            this.barrierPiecesList.Add(this.topMiddle4);
+            this.barrierPiecesList.Add(this.topMiddle5);
+            this.barrierPiecesList.Add(this.topMiddle6);
         }
 
         private void addTopLeftToList()
         {
-            barrierPiecesList.Add(topLeft1);
-            barrierPiecesList.Add(topLeft2);
-            barrierPiecesList.Add(topLeft3);
-            barrierPiecesList.Add(topLeft4);
-            barrierPiecesList.Add(topLeft5);
-            barrierPiecesList.Add(topLeft6);
+            this.barrierPiecesList.Add(this.topLeft1);
+            this.barrierPiecesList.Add(this.topLeft2);
+            this.barrierPiecesList.Add(this.topLeft3);
+            this.barrierPiecesList.Add(this.topLeft4);
+            this.barrierPiecesList.Add(this.topLeft5);
+            this.barrierPiecesList.Add(this.topLeft6);
         }
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace SpaceInvaders.View.Sprites
         /// </summary>
         public void RemoveTopLeftPiece()
         {
-            disableRectanglesInPiece("topLeft");
+            this.disableRectanglesInPiece("topLeft");
         }
 
         /// <summary>
@@ -110,7 +114,7 @@ namespace SpaceInvaders.View.Sprites
         /// </summary>
         public void RemoveTopMiddlePiece()
         {
-            disableRectanglesInPiece("topMiddle");
+            this.disableRectanglesInPiece("topMiddle");
         }
 
         /// <summary>
@@ -118,7 +122,7 @@ namespace SpaceInvaders.View.Sprites
         /// </summary>
         public void RemoveTopRightPiece()
         {
-            disableRectanglesInPiece("topRight");
+            this.disableRectanglesInPiece("topRight");
         }
 
         /// <summary>
@@ -126,7 +130,7 @@ namespace SpaceInvaders.View.Sprites
         /// </summary>
         public void RemoveBottomLeftPiece()
         {
-            disableRectanglesInPiece("bottomLeft");
+            this.disableRectanglesInPiece("bottomLeft");
         }
 
         /// <summary>
@@ -134,7 +138,7 @@ namespace SpaceInvaders.View.Sprites
         /// </summary>
         public void RemoveBottomMiddlePiece()
         {
-            disableRectanglesInPiece("bottomMiddle");
+            this.disableRectanglesInPiece("bottomMiddle");
         }
 
         /// <summary>
@@ -142,12 +146,12 @@ namespace SpaceInvaders.View.Sprites
         /// </summary>
         public void RemoveBottomRightPiece()
         {
-            disableRectanglesInPiece("bottomRight");
+            this.disableRectanglesInPiece("bottomRight");
         }
 
         private void disableRectanglesInPiece(string rectanglePieceId)
         {
-            foreach (var currentRectangle in barrierPiecesList)
+            foreach (var currentRectangle in this.barrierPiecesList)
             {
                 if (currentRectangle.Name.Contains(rectanglePieceId))
                 {

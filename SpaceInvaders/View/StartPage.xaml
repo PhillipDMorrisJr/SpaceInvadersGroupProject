@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="SpaceInvaders.View.StartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SpaceInvaders.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="720"
+    d:DesignWidth="1080">
+
+    <Page.Resources>
+        <Style x:Key="StartPageStyle" TargetType="HyperlinkButton">
+            <Setter Property="Background" Value="GhostWhite"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="180" />
+            <Setter Property="Canvas.Left" Value="470"/>
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </Page.Resources>
+
+    <Canvas x:Name="startCanvas" Width="1080" Height="720" Background="Black">
+        <HyperlinkButton x:Name="startbutton" Content="Start Game" Canvas.Top="296" 
+                Style="{StaticResource StartPageStyle}" Click="Startbutton_OnClick"/>
+        <HyperlinkButton x:Name="viewScoreboardButton" Content="View Scoreboard" Canvas.Top="366"
+                Style="{StaticResource StartPageStyle}" Click="ViewScoreboardButton_OnClick"/>
+        <HyperlinkButton x:Name="resetScoreboardButton" Content="Reset Scoreboard" Canvas.Top="442"
+                Style="{StaticResource StartPageStyle}" Click="ResetScoreboardButton_OnClick"/>
+        <TextBlock Canvas.Left="311" TextWrapping="Wrap" Text="Space Invaders" Canvas.Top="80"
+                   Foreground="Aqua" Height="143" Width="500" FontSize="75"/>
+
+    </Canvas>
+</Page>

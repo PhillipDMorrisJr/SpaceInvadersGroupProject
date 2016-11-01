@@ -25,7 +25,7 @@ namespace SpaceInvaders.Model
         /// <param name="levels">The levels in this fleet.</param>
         public EnemyFleet(int levels)
         {
-            if (levels < 1)
+            if (levels < 0)
             {
                 levels = 1;
             }
@@ -97,7 +97,11 @@ namespace SpaceInvaders.Model
         {
             foreach (var enemyRow in Fleet)
             {
-                enemyRow.Remove(enemyShip);
+                if (enemyRow.Contains(enemyShip))
+                {
+                    enemyRow.Remove(enemyShip);
+                }
+                
             }
         }
 
@@ -201,7 +205,7 @@ namespace SpaceInvaders.Model
         ///     The fleet.
         /// </value>
         public List<List<EnemyShip>> Fleet { get; }
-
+        
         #endregion
     }
 }
