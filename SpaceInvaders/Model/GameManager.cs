@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    ///     Manages the entire game. stuuf
+    ///     Manages the entire game.
     /// </summary>
     public class GameManager
     {
@@ -19,7 +19,6 @@ namespace SpaceInvaders.Model
         public const int TickInterval = 25;
 
         private const double PlayerShipBottomOffset = 30;
-        private const double PlayerShipTopOffset = 30;
         private const double EnemyShipOffset = 10;
         private const double Half = 0.5;
 
@@ -27,18 +26,18 @@ namespace SpaceInvaders.Model
         private readonly double backgroundWidth;
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, TickInterval);
         private DispatcherTimer gameTimer;
+        private int currentLevel;
+        private EnemyFleet fleet;
 
-        private readonly EnemyFleet fleet;
-
-        private readonly List<Bullet> playerAmmo;
-        private readonly List<Bullet> enemyAmmo;
+        private List<Bullet> playerAmmo;
+        private List<Bullet> enemyAmmo;
 
         private PlayerShip playerShip;
-        private readonly PlayerShipLives playerPlayerShipLives;
+        private PlayerShipFactory playerPlayerShipFactory;
         private Canvas currentBackground;
 
         private int enemyMotionCounter;
-        private readonly Scoreboard gameScoreboard;
+        private Scoreboard gameScoreboard;
 
         #endregion
 
@@ -69,22 +68,34 @@ namespace SpaceInvaders.Model
                 throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
             }
 
+            this.currentLevel = 0;
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
+            
 
-            this.initializeTimer();
-
-            this.playerPlayerShipLives = new PlayerShipLives(3);
-            this.playerShip = this.playerPlayerShipLives.UseLife();
+            this.initializePlayerShipFactory();
 
             this.fleet = new EnemyFleet(4);
 
+            this.initializeDataMembers();
+
+            this.enemyMotionCounter = 0;
+
+            this.initializeTimer();  
+        }
+
+        private void initializeDataMembers()
+        {
             this.playerAmmo = new List<Bullet>();
             this.enemyAmmo = new List<Bullet>();
 
             this.gameScoreboard = new Scoreboard();
+        }
 
-            this.enemyMotionCounter = 0;
+        private void initializePlayerShipFactory()
+        {
+            this.playerPlayerShipFactory = new PlayerShipFactory(3);
+            this.playerShip = this.playerPlayerShipFactory.UseLife();
         }
 
         #endregion
@@ -132,14 +143,14 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void FirePlayerBullet()
         {
-            var isPlayerWaiting = false;
-            isPlayerWaiting = this.checkIfPlayerIsWaitingToFire(isPlayerWaiting);
+            var isPlayerWaiting = this.checkIfPlayerIsWaitingToFire();
             this.checkIfPlayerAmmoShouldBeStocked(isPlayerWaiting);
             this.handlePlayerBulletHits();
         }
 
-        private bool checkIfPlayerIsWaitingToFire(bool isBulletWaiting)
+        private bool checkIfPlayerIsWaitingToFire()
         {
+            bool isBulletWaiting = false;
             if (this.playerAmmo.Any())
             {
                 var bulletClosetToShip = this.playerAmmo.Max(bullet => bullet.Y + bullet.Height);
@@ -165,11 +176,11 @@ namespace SpaceInvaders.Model
         public void FireEnemyBullet()
         {
             this.handleEachEnemyBullet();
-
-            for (var i = 0; i < this.enemyAmmo.Count; i++)
+            List<Bullet> enemyBulletsToRemove = new List<Bullet>(this.enemyAmmo);
+            foreach (Bullet enemyBullet in enemyBulletsToRemove)
             {
-                this.moveEnemyBulletDownWhenBulletIsInCanvas(this.enemyAmmo[i]);
-                this.removeEnemyBulletFromPlayWhenItHitsPlayerShip(this.enemyAmmo[i]);
+                this.moveEnemyBulletDownWhenBulletIsInCanvas(enemyBullet);
+                this.removeEnemyBulletFromPlayWhenItHitsPlayerShip(enemyBullet);
             }
         }
 
@@ -178,7 +189,7 @@ namespace SpaceInvaders.Model
             if (this.bulletHitShip(enemyBullet, this.playerShip))
             {
                 this.currentBackground.Children.Remove(this.playerShip.Sprite);
-                this.removeEnemyBullet(enemyBullet);
+                this.removeBulletFromGame(enemyBullet);
 
                 this.bringPlayerBackToLifeWhenThereAreMoreLives();
             }
@@ -189,22 +200,18 @@ namespace SpaceInvaders.Model
             this.gameTimer.Stop();
             this.playerShip.Destroyed = true;
 
-            if (this.playerPlayerShipLives.IsThereAnyLives)
+            if (this.playerPlayerShipFactory.IsThereAnyLives)
             {
                 if (this.playerShip.Destroyed)
                 {
-                    this.playerShip = this.playerPlayerShipLives.UseLife();
+                    this.playerShip = this.playerPlayerShipFactory.UseLife();
                     this.addPlayerShipToGame();
                     this.gameTimer.Start();
                 }
             }
         }
 
-        private void removeEnemyBullet(Bullet enemyBullet)
-        {
-            this.currentBackground.Children.Remove(enemyBullet.Sprite);
-            this.enemyAmmo.Remove(enemyBullet);
-        }
+       
 
         private void moveEnemyBulletDownWhenBulletIsInCanvas(Bullet enemyBullet)
         {
@@ -252,16 +259,16 @@ namespace SpaceInvaders.Model
             var amountOfShipsToFire = randomizer.Next(firingShips.Count());
             for (var i = 0; i < amountOfShipsToFire; i++)
             {
-                var firingShip = selectFiringShip(randomizer, amountOfShipsToFire, firingShips);
+                var firingShip = this.selectFiringShip(randomizer, amountOfShipsToFire, firingShips);
                 this.fireShipWhenShipHasNotFired(firingShip);
             }
         }
 
         private void fireShipWhenShipHasNotFired(EnemyShip firingShip)
         {
-            var isEnemyWaiting = false;
+            
 
-            isEnemyWaiting = this.checkIfEnemyIsWaiting(isEnemyWaiting, firingShip);
+            var isEnemyWaiting = this.checkIfEnemyIsWaiting(firingShip);
             if (!this.enemyAmmo.Any() || !isEnemyWaiting)
             {
                 this.addEnemyBulletsToScreen(firingShip);
@@ -269,8 +276,10 @@ namespace SpaceInvaders.Model
             }
         }
 
-        private bool checkIfEnemyIsWaiting(bool isEnemyWaiting, EnemyShip enemy)
+        private bool checkIfEnemyIsWaiting(EnemyShip enemy)
         {
+            bool isEnemyWaiting = false;
+
             if (this.enemyAmmo.Any())
             {
                 var bulletClosetToShip = this.enemyAmmo.Max(bullet => bullet.Y + bullet.Height);
@@ -280,7 +289,7 @@ namespace SpaceInvaders.Model
             return isEnemyWaiting;
         }
 
-        private static EnemyShip selectFiringShip(Random randomizer, int amountOfShipsToFire,
+        private EnemyShip selectFiringShip(Random randomizer, int amountOfShipsToFire,
             List<EnemyShip> firingShips)
         {
             var firingShipIndex = randomizer.Next(amountOfShipsToFire);
@@ -318,10 +327,10 @@ namespace SpaceInvaders.Model
             }
         }
 
-        private void placeEnemyBullet(EnemyShip enemy, Bullet randomBullet)
+        private void placeEnemyBullet(EnemyShip enemy, Bullet bullet)
         {
-            randomBullet.X = enemy.X + enemy.Sprite.ActualWidth/2;
-            randomBullet.Y = enemy.Y;
+            bullet.X = enemy.X + enemy.Sprite.ActualWidth*Half + bullet.X*Half;
+            bullet.Y = enemy.Y;
         }
 
         /// <summary>
@@ -338,9 +347,9 @@ namespace SpaceInvaders.Model
 
         private void handlePlayerBullets()
         {
-            for (var i = 0; i < this.playerAmmo.Count; i++)
+            List<Bullet> playerBulletsToRemove = new List<Bullet>(this.playerAmmo);
+                foreach (var bullet in playerBulletsToRemove)
             {
-                var bullet = this.playerAmmo[i];
                 this.moveBulletUpUntilOutOfBounds(bullet);
             }
         }
@@ -355,14 +364,20 @@ namespace SpaceInvaders.Model
             }
             else
             {
-                this.removePlayerBullet(bullet);
+                this.removeBulletFromGame(bullet);
             }
         }
 
-        private void removePlayerBullet(Bullet bullet)
+        private void removeBulletFromGame(Bullet bullet)
         {
             this.currentBackground.Children.Remove(bullet.Sprite);
-            this.playerAmmo.Remove(bullet);
+            if (this.playerAmmo.Contains(bullet))
+            {
+                this.playerAmmo.Remove(bullet);
+            } else if (this.enemyAmmo.Contains(bullet))
+            {
+                this.enemyAmmo.Remove(bullet);
+            }
         }
 
         private void addEnemyShipsToGame()
@@ -389,18 +404,19 @@ namespace SpaceInvaders.Model
 
         private void placeEnemyShipsNearTopOfBackgroundCentered()
         {
-            for (var levelIterator = 1; levelIterator <= this.fleet.AmountOfLevels; levelIterator++)
+            for (var levelIterator = 1; levelIterator <= this.fleet.Levels; levelIterator++)
             {
-                var levelOneShip = this.fleet.GetAllEnemyShips().First();
+                
                 var enemyRowCount = this.fleet.GetAmountOfShipForLevel(levelIterator);
-                var enemyXOrigin = this.calculateEnemyXOrigin(levelOneShip, enemyRowCount);
+                var enemyXOrigin = this.calculateEnemyXOrigin(enemyRowCount);
 
                 this.setXLocationForShipsAfterFirstShip(levelIterator, enemyXOrigin);
             }
         }
 
-        private double calculateEnemyXOrigin(EnemyShip levelOneShip, int enemyRowCount)
+        private double calculateEnemyXOrigin( int enemyRowCount)
         {
+            var levelOneShip = this.fleet.GetAllEnemyShips().First();
             return this.backgroundWidth*Half - levelOneShip.Width*(enemyRowCount*Half) -
                    EnemyShipOffset;
         }
@@ -444,10 +460,9 @@ namespace SpaceInvaders.Model
 
         private void setEnemyYLocation(int level, EnemyShip currentEnemy)
         {
-            var topCanvasBuffer = 20;
             if (level == 1)
             {
-                currentEnemy.Y = (topCanvasBuffer + currentEnemy.Height)*this.fleet.AmountOfLevels;
+                currentEnemy.Y = this.backgroundHeight*Half;
             }
             else
             {
@@ -545,9 +560,7 @@ namespace SpaceInvaders.Model
             var interval = 20;
             var firstIntervalUpperBound = 10;
 
-            var secondIntervalLowerBound = firstIntervalUpperBound;
             var secondIntervalUpperBound = firstIntervalUpperBound + interval;
-            var thirdIntervalLowerBound = secondIntervalUpperBound;
             var thirdIntervalUpperBound = secondIntervalUpperBound + interval;
 
             this.enemyMotionCounter++;
@@ -586,7 +599,7 @@ namespace SpaceInvaders.Model
 
         private void checkIfEnemyCounterInSecondInterval(int secondIntervalLowerBound, int secondIntervalUpperBound)
         {
-            if ((this.enemyMotionCounter > 10) && (this.enemyMotionCounter <= 30))
+            if ((this.enemyMotionCounter > secondIntervalLowerBound) && (this.enemyMotionCounter <= secondIntervalUpperBound))
             {
                 this.moveAllEnemyShipsLeft();
             }
@@ -612,7 +625,7 @@ namespace SpaceInvaders.Model
         private void placePlayerBullet(Bullet bullet)
         {
             var halfOfShip = this.playerShip.Sprite.Width*Half;
-            bullet.X = this.playerShip.X + halfOfShip;
+            bullet.X = this.playerShip.X + halfOfShip - bullet.Sprite.Width * Half;
             bullet.Y = this.playerShip.Y;
         }
 
@@ -626,9 +639,9 @@ namespace SpaceInvaders.Model
 
         private void removeEachEnemyHitByBulletFromGame(EnemyShip enemy)
         {
-            for (var i = 0; i < this.playerAmmo.Count; i++)
+            List<Bullet> playerBulletsFired = new List<Bullet>(this.playerAmmo);
+            foreach (var bulletFired in playerBulletsFired)
             {
-                var bulletFired = this.playerAmmo[i];
                 this.removeEnemyHitByBulletFromGame(bulletFired, enemy);
             }
         }
@@ -637,9 +650,9 @@ namespace SpaceInvaders.Model
         {
             if (this.bulletHitShip(bullet, enemy))
             {
-                this.gameScoreboard.IncreaseScore(enemy.GetLevel);
+                this.gameScoreboard.IncreaseScore(enemy.Level);
                 this.fleet.RemoveEnemyFromFleet(enemy);
-                this.removePlayerBullet(bullet);
+                this.removeBulletFromGame(bullet);
                 this.currentBackground.Children.Remove(enemy.Sprite);
             }
         }
@@ -671,8 +684,16 @@ namespace SpaceInvaders.Model
         /// <returns>return true when the game is over</returns>
         public bool IsGameOver()
         {
-            if (!this.playerPlayerShipLives.IsThereAnyLives || this.areEnemyShipsOutOfPlay())
+            
+            if (!this.playerPlayerShipFactory.IsThereAnyLives || this.areEnemyShipsOutOfPlay())
             {
+                if (this.currentLevel < 3 && this.playerPlayerShipFactory.IsThereAnyLives)
+                {
+                    this.currentLevel++;
+                    this.gameTimer.Stop();
+                    this.goToNextRound();
+                    return false;
+                }
                 return true;
             }
             return false;
@@ -689,28 +710,78 @@ namespace SpaceInvaders.Model
             return false;
         }
 
-        private static bool areGameOverConditionsMet(bool enemShipsOutOfPlay, bool playerShipIsOutOfPlay,
-            bool gameOver)
-        {
-            if (enemShipsOutOfPlay || playerShipIsOutOfPlay)
-            {
-                return true;
-            }
-
-            return gameOver;
-        }
-
         private void stopTimerAtGameOver()
         {
             if (this.IsGameOver())
             {
+                this.resetCanvas();
                 this.gameTimer.Stop();
             }
         }
 
+        private void goToNextRound()
+        {
+            this.resetCanvas();
+
+            this.initializePlayerShipFactory();
+
+            this.fleet = new EnemyFleet(this.fleet.Levels + 1);
+
+            this.initializeDataMembers();
+
+            this.enemyMotionCounter = 0;
+
+            this.initializeTimer();
+            this.InitializeGame(this.currentBackground);
+        }
+
         private string displayGameStatistics()
         {
-            return "Score: " + this.gameScoreboard.Score + "\n" + "Lives: " + this.playerPlayerShipLives.AmountOfLives;
+            return "Score: " + this.gameScoreboard.Score + "\n" + "Lives: " + this.playerPlayerShipFactory.AmountOfLives;
+        }
+
+        private void resetCanvas()
+        {
+            this.currentBackground.Children.Remove(this.playerShip.Sprite);
+            this.clearEnemies();
+
+            this.clearBullets();
+        }
+
+        private void clearBullets()
+        {
+            this.clearEnemyBullets();
+            this.clearPlayerBullets();
+        }
+
+        private void clearPlayerBullets()
+        {
+
+            List<Bullet> playerBulletsToRemove = new List<Bullet>(this.playerAmmo);
+            foreach (var bullet in playerBulletsToRemove)
+            {
+                this.removeBulletFromGame(bullet);
+            }
+        }
+
+        private void clearEnemyBullets()
+        {
+            List<Bullet> enemyBulletsToRemove = new List<Bullet>(this.enemyAmmo);
+            foreach (var bullet in enemyBulletsToRemove)
+            {
+                this.removeBulletFromGame(bullet);
+            }
+        }
+
+        private void clearEnemies()
+        {
+            List<EnemyShip> enemiesToRemove = new List<EnemyShip>(this.fleet.GetAllEnemyShips());
+
+            foreach (EnemyShip enemy in enemiesToRemove)
+            {
+                this.fleet.RemoveEnemyFromFleet(enemy);
+                this.currentBackground.Children.Remove(enemy.Sprite);
+            }
         }
 
         #endregion

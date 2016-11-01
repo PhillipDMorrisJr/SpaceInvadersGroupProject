@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -15,19 +15,19 @@ namespace SpaceInvaders.View
     /// <summary>
     ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage
     {
         #region Data members
 
         /// <summary>
         ///     The application height
         /// </summary>
-        public const double ApplicationHeight = 480;
+        public const double ApplicationHeight = 720;
 
         /// <summary>
         ///     The application width
         /// </summary>
-        public const double ApplicationWidth = 640;
+        public const double ApplicationWidth = 1080;
 
         /// <summary>
         ///     The tick interval in milliseconds
@@ -59,10 +59,13 @@ namespace SpaceInvaders.View
             this.timer.Tick += this.timerOnTick;
             this.timer.Start();
 
-            Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
+
+
+                Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
+            
+
         }
 
         #endregion
@@ -101,14 +104,57 @@ namespace SpaceInvaders.View
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
-                    this.gameManager.MovePlayerShipLeft();
+                    if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Space) & CoreVirtualKeyStates.Down) != 0)
+                    {
+                        this.gameManager.MovePlayerShipLeft();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else
+                    {
+                        this.gameManager.MovePlayerShipLeft();
+                    }
                     break;
+
+
                 case VirtualKey.Right:
-                    this.gameManager.MovePlayerShipRight();
+                    if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Space) & CoreVirtualKeyStates.Down) != 0)
+                    {
+                        this.gameManager.MovePlayerShipRight();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else
+                    {
+                        this.gameManager.MovePlayerShipRight();
+                    }
+                    
                     break;
+
                 case VirtualKey.Space:
-                    this.gameManager.FirePlayerBullet();
+                    if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Right) & CoreVirtualKeyStates.Down) != 0)
+                    {
+                        this.gameManager.MovePlayerShipRight();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Left) & CoreVirtualKeyStates.Down) !=
+                             0)
+                    {
+                        this.gameManager.MovePlayerShipLeft();
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+                    else
+                    {
+                        this.fireBulltWhenGameIsNotOver();
+                    }
+
                     break;
+            }
+        }
+
+        private void fireBulltWhenGameIsNotOver()
+        {
+            if (!this.gameManager.IsGameOver())
+            {
+                this.gameManager.FirePlayerBullet();
             }
         }
 
