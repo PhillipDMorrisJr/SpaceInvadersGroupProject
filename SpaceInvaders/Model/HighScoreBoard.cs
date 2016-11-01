@@ -2,59 +2,54 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.UI.Notifications;
 
 namespace SpaceInvaders.Model
 {
-    class HighScoreBoard 
+    internal class HighScoreBoard
     {
-        private List<RankedPlayer> highScores;
-        private int AmountOfHighScores = 10;
+        private readonly int AmountOfHighScores = 10;
+        private readonly List<RankedPlayer> highScores;
 
 
         public HighScoreBoard()
         {
-            this.highScores = new List<RankedPlayer>();
+            highScores = new List<RankedPlayer>();
             //read files in parameters of highscores
-            this.readFromFile();
-            this.writeToFile();
+            readFromFile();
+            writeToFile();
         }
 
-        public void AddPlayerTohighScoreBoard(String name, int score, RankedPlayer.Level level)
+        public void AddPlayerTohighScoreBoard(string name, int score, RankedPlayer.Level level)
         {
-            
-            RankedPlayer aPlayer = new RankedPlayer(name, score, level);
+            var aPlayer = new RankedPlayer(name, score, level);
 
-           this.highScores.Add(aPlayer);
+            highScores.Add(aPlayer);
 
-            this.sortHighScores();
+            sortHighScores();
 
-            this.trimHighScoreCollection();
+            trimHighScoreCollection();
         }
 
         private void trimHighScoreCollection()
         {
-            
-            while (this.highScores.Count > this.AmountOfHighScores)
+            while (highScores.Count > AmountOfHighScores)
             {
-                int lastIndex = this.highScores.Count - 1;
-                this.highScores.RemoveAt(lastIndex);
+                var lastIndex = highScores.Count - 1;
+                highScores.RemoveAt(lastIndex);
             }
         }
 
         private void sortHighScores()
         {
-            var copyOfHighScores = this.highScores.OrderBy(player => player.Score);
+            var copyOfHighScores = highScores.OrderBy(player => player.Score);
 
-            this.highScores.Clear();
+            highScores.Clear();
 
             foreach (var variable in copyOfHighScores)
             {
-                this.highScores.Add(variable);
+                highScores.Add(variable);
             }
         }
 
@@ -79,9 +74,9 @@ namespace SpaceInvaders.Model
 
         private async void writeToFile()
         {
-            String playerIDs = "";
+            var playerIDs = "";
 
-            foreach (var player in this.highScores)
+            foreach (var player in highScores)
             {
                 playerIDs += player.PlayerID;
             }
@@ -92,8 +87,8 @@ namespace SpaceInvaders.Model
                 await storageFolder.CreateFileAsync("highscores.txt",
                     CreationCollisionOption.ReplaceExisting);
 
-            string[] output = {
-                
+            string[] output =
+            {
                 playerIDs
             };
 
@@ -114,6 +109,5 @@ namespace SpaceInvaders.Model
             }
             stream.Dispose();
         }
-
     }
 }

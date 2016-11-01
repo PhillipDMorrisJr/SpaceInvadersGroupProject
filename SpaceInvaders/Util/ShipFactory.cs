@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.Util
 {
-    static class ShipFactory
+    internal static class ShipFactory
     {
         public enum ShipSelections
         {
@@ -16,23 +16,14 @@ namespace SpaceInvaders.Util
 
         public static GameObject SelectShip(ShipSelections shipSelectionsRequested)
         {
-
             if ((int) shipSelectionsRequested < (int) ShipSelections.PlayerShip)
             {
-                int enemyLevel = (int) shipSelectionsRequested;
-                EnemyShip ship = new EnemyShip(enemyLevel);
+                var enemyLevel = (int) shipSelectionsRequested;
+                var ship = new EnemyShip(enemyLevel);
                 return ship;
             }
-            else
-            {
-                PlayerShip aPlayer = new PlayerShip();
-                return aPlayer;
-            }
-
-
-
-
-
+            var aPlayer = new PlayerShip();
+            return aPlayer;
         }
     }
 }

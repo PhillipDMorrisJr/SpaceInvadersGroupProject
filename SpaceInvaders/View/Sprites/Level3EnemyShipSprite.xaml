@@ -13,10 +13,10 @@
 
     <Canvas>
         <local:Level1EnemyShipSprite />
-        <Ellipse Style="{StaticResource Light1}" Fill="{StaticResource Level3ShipLightsColor}"/>
-        <Ellipse Style="{StaticResource Light2}" Fill="{StaticResource Level3ShipLightsColor}"/>
-        <Ellipse Style="{StaticResource Light3}" Fill="{StaticResource Level3ShipLightsColor}"/>
-        <Ellipse Style="{StaticResource Light4}" Fill="{StaticResource Level3ShipLightsColor}"/>
+        <Ellipse Style="{StaticResource Light1}" Fill="{StaticResource Level3ShipLightsColor}" />
+        <Ellipse Style="{StaticResource Light2}" Fill="{StaticResource Level3ShipLightsColor}" />
+        <Ellipse Style="{StaticResource Light3}" Fill="{StaticResource Level3ShipLightsColor}" />
+        <Ellipse Style="{StaticResource Light4}" Fill="{StaticResource Level3ShipLightsColor}" />
         <Rectangle Canvas.Left="9" Style="{StaticResource EnemyShipGuns}" />
         <Rectangle Canvas.Left="29" Style="{StaticResource EnemyShipGuns}" />
     </Canvas>

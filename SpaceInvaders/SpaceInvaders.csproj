@@ -110,6 +110,7 @@
     <Compile Include="Model\Scoreboard.cs" />
     <Compile Include="Util\ShipFactory.cs" />
     <Compile Include="Util\RandomUtil.cs" />
+    <Compile Include="Util\SoundFx.cs" />
     <Compile Include="Util\TimerUtil.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -151,6 +152,10 @@
     <None Include="SpaceInvaders_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Nostalgia - King Koopa Mix %28Hey Scott Plenty of Dubs%29.mp3" />
+    <Content Include="Assets\Nostalgia - Peppy.mp3" />
+    <Content Include="Assets\Nostalgia_-_Peppy.wav" />
+    <Content Include="Assets\phasers3.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -159,6 +164,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="View\phasers3.wav" />
     <Content Include="View\spaceBackground.png" />
   </ItemGroup>
   <ItemGroup>

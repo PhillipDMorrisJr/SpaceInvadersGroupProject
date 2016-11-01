@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SpaceInvaders.Util;
 
 namespace SpaceInvaders.Model
@@ -30,11 +29,11 @@ namespace SpaceInvaders.Model
             {
                 levels = 1;
             }
-            this.Levels = levels;
-            this.Fleet = new List<List<EnemyShip>>();
+            Levels = levels;
+            Fleet = new List<List<EnemyShip>>();
 
-            this.addShipsToFleet(levels);
-            this.addAllEnemiesToGame();
+            addShipsToFleet(levels);
+            addAllEnemiesToGame();
         }
 
         #endregion
@@ -46,49 +45,45 @@ namespace SpaceInvaders.Model
             for (var i = 0; i < levels; i++)
             {
                 var enemyRow = new List<EnemyShip>();
-                this.Fleet.Add(enemyRow);
+                Fleet.Add(enemyRow);
             }
         }
 
         private void addAllEnemiesToGame()
         {
             var level = 0;
-            foreach (var listOfEnemies in this.Fleet)
+            foreach (var listOfEnemies in Fleet)
             {
                 level++;
-                this.addEnemiesToEachLevelOfEnemies(level, listOfEnemies);
+                addEnemiesToEachLevelOfEnemies(level, listOfEnemies);
             }
         }
 
         private void addEnemiesToEachLevelOfEnemies(int level, List<EnemyShip> listOfEnemies)
         {
-            var amountOfEnemiesForCurrentLevel = this.GetAmountOfShipForLevel(level);
+            var amountOfEnemiesForCurrentLevel = GetAmountOfShipForLevel(level);
             for (var i = 0; i < amountOfEnemiesForCurrentLevel; i++)
             {
-
-
                 if (level == (int) ShipFactory.ShipSelections.Level1EnemyShip)
                 {
-                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.Level1EnemyShip);
+                    var ship = (EnemyShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.Level1EnemyShip);
                     listOfEnemies.Add(ship);
                 }
-                else if (level == (int)ShipFactory.ShipSelections.Level2EnemyShip)
+                else if (level == (int) ShipFactory.ShipSelections.Level2EnemyShip)
                 {
-                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.Level2EnemyShip);
+                    var ship = (EnemyShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.Level2EnemyShip);
                     listOfEnemies.Add(ship);
                 }
-                else if (level == (int)ShipFactory.ShipSelections.Level3EnemyShip)
+                else if (level == (int) ShipFactory.ShipSelections.Level3EnemyShip)
                 {
-                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.Level3EnemyShip);
+                    var ship = (EnemyShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.Level3EnemyShip);
                     listOfEnemies.Add(ship);
                 }
-                else if (level >= (int)ShipFactory.ShipSelections.DefaultEnemyShip)
+                else if (level >= (int) ShipFactory.ShipSelections.DefaultEnemyShip)
                 {
-                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.DefaultEnemyShip);
+                    var ship = (EnemyShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.DefaultEnemyShip);
                     listOfEnemies.Add(ship);
                 }
-
-
             }
         }
 
@@ -100,7 +95,7 @@ namespace SpaceInvaders.Model
         /// <param name="enemyShip">The enemy ship to be removed.</param>
         public void RemoveEnemyFromFleet(EnemyShip enemyShip)
         {
-            foreach (var enemyRow in this.Fleet)
+            foreach (var enemyRow in Fleet)
             {
                 if (enemyRow.Contains(enemyShip))
                 {
@@ -118,9 +113,9 @@ namespace SpaceInvaders.Model
         /// <returns>List of ships that can fire</returns>
         public List<EnemyShip> GetFiringShips()
         {
-            List<EnemyShip> firingShips = new List<EnemyShip>();
+            var firingShips = new List<EnemyShip>();
 
-            foreach (var enemyRows in this.Fleet)
+            foreach (var enemyRows in Fleet)
             {
                 foreach (var enemy in enemyRows)
                 {
@@ -144,7 +139,7 @@ namespace SpaceInvaders.Model
         {
             var currentLevelShips = new List<EnemyShip>();
 
-            foreach (var enemyRows in this.Fleet)
+            foreach (var enemyRows in Fleet)
             {
                 foreach (var enemy in enemyRows)
                 {
@@ -167,7 +162,7 @@ namespace SpaceInvaders.Model
         {
             var enemies = new List<EnemyShip>();
 
-            foreach (var enemyRows in this.Fleet)
+            foreach (var enemyRows in Fleet)
             {
                 foreach (var enemy in enemyRows)
                 {

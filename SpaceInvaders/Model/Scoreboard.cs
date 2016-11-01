@@ -6,6 +6,18 @@ namespace SpaceInvaders.Model
 {
     internal class Scoreboard
     {
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Scoreboard" /> class.
+        /// </summary>
+        public Scoreboard()
+        {
+            Score = 0;
+        }
+
+        #endregion
+
         #region Properties
 
         #region Property
@@ -22,18 +34,6 @@ namespace SpaceInvaders.Model
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Scoreboard" /> class.
-        /// </summary>
-        public Scoreboard()
-        {
-            this.Score = 0;
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SpaceInvaders.Model
             if (level > 0)
             {
                 var scoreValue = (level + 1)*100;
-                this.Score += scoreValue;
+                Score += scoreValue;
             }
         }
 
