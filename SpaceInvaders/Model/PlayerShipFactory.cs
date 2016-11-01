@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SpaceInvaders.Util;
 
 namespace SpaceInvaders.Model
 {
@@ -71,16 +72,17 @@ namespace SpaceInvaders.Model
 
         private void addLives(int amountOfLives)
         {
-            var initialPlayerShip = new PlayerShip();
+            PlayerShip initialPlayerShip = (PlayerShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
+
             this.lives.Add(initialPlayerShip);
 
             for (var i = 0; i < amountOfLives; i++)
             {
-                var aPlayerShip = new PlayerShip();
+                var aPlayerShip = (PlayerShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
                 this.lives.Add(aPlayerShip);
             }
 
-            var bufferPlayerShip = new PlayerShip();
+            var bufferPlayerShip = (PlayerShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
             this.lives.Add(bufferPlayerShip);
         }
 
