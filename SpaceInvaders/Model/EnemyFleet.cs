@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using SpaceInvaders.Util;
 
 namespace SpaceInvaders.Model
 {
@@ -63,8 +65,30 @@ namespace SpaceInvaders.Model
             var amountOfEnemiesForCurrentLevel = this.GetAmountOfShipForLevel(level);
             for (var i = 0; i < amountOfEnemiesForCurrentLevel; i++)
             {
-                var ship = new EnemyShip(level);
-                listOfEnemies.Add(ship);
+
+
+                if (level == (int) ShipFactory.ShipSelections.Level1EnemyShip)
+                {
+                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.Level1EnemyShip);
+                    listOfEnemies.Add(ship);
+                }
+                else if (level == (int)ShipFactory.ShipSelections.Level2EnemyShip)
+                {
+                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.Level2EnemyShip);
+                    listOfEnemies.Add(ship);
+                }
+                else if (level == (int)ShipFactory.ShipSelections.Level3EnemyShip)
+                {
+                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.Level3EnemyShip);
+                    listOfEnemies.Add(ship);
+                }
+                else if (level >= (int)ShipFactory.ShipSelections.DefaultEnemyShip)
+                {
+                    EnemyShip ship = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.DefaultEnemyShip);
+                    listOfEnemies.Add(ship);
+                }
+
+
             }
         }
 
