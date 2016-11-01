@@ -2,7 +2,7 @@
     x:Class="SpaceInvaders.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SpaceInvaders" 
+    xmlns:local="using:SpaceInvaders"
     xmlns:sprites="using:SpaceInvaders.View.Sprites"
     RequestedTheme="Light">
 
@@ -22,7 +22,7 @@
         <Style x:Key="EnemyShipLights" TargetType="Ellipse">
             <Setter Property="Width" Value="3" />
             <Setter Property="Height" Value="3" />
-            <Setter Property="Canvas.Top" Value="17"/>
+            <Setter Property="Canvas.Top" Value="17" />
         </Style>
         <Style TargetType="Ellipse" x:Key="Light1" BasedOn="{StaticResource EnemyShipLights}">
             <Setter Property="Canvas.Left" Value="4" />

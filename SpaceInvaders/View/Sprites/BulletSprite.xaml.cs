@@ -1,8 +1,8 @@
 ﻿namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    /// Draws a player bullet.
-    /// Must implement the ISpriteRenderer so will be displayed as a game object.
+    ///     Draws a player bullet.
+    ///     Must implement the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
     public sealed partial class BulletSprite
     {
@@ -16,15 +16,13 @@
         public BulletSprite()
         {
             this.InitializeComponent();
-            this.fireSound.Stop();
-            this.fireSound.Play();
+            fireSound.Stop();
+            fireSound.Play();
         }
 
         #endregion
 
         #region Methods
-
-        
 
         #endregion
     }

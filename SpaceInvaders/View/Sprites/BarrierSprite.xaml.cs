@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Shapes;
 
@@ -11,7 +10,7 @@ namespace SpaceInvaders.View.Sprites
     public sealed partial class BarrierSprite
     {
         private readonly List<Rectangle> barrierPiecesList;
-        
+
         #region Constructors
 
         /// <summary>
@@ -22,8 +21,8 @@ namespace SpaceInvaders.View.Sprites
         public BarrierSprite()
         {
             this.InitializeComponent();
-            this.barrierPiecesList = new List<Rectangle>();
-            this.addAllBarrierPieces();
+            barrierPiecesList = new List<Rectangle>();
+            addAllBarrierPieces();
         }
 
         #endregion
@@ -32,123 +31,123 @@ namespace SpaceInvaders.View.Sprites
 
         private void addAllBarrierPieces()
         {
-            this.addTopLeftToList();
-            this.addTopMiddleToList();
-            this.addTopRightToList();
-            this.addBottomLeftToList();
-            this.addBottomMiddleToList();
-            this.addBottomRightToList();
+            addTopLeftToList();
+            addTopMiddleToList();
+            addTopRightToList();
+            addBottomLeftToList();
+            addBottomMiddleToList();
+            addBottomRightToList();
         }
 
         private void addBottomRightToList()
         {
-            this.barrierPiecesList.Add(this.bottomRight1);
-            this.barrierPiecesList.Add(this.bottomRight2);
-            this.barrierPiecesList.Add(this.bottomRight3);
-            this.barrierPiecesList.Add(this.bottomRight4);
-            this.barrierPiecesList.Add(this.bottomRight5);
-            this.barrierPiecesList.Add(this.bottomRight6);
+            barrierPiecesList.Add(bottomRight1);
+            barrierPiecesList.Add(bottomRight2);
+            barrierPiecesList.Add(bottomRight3);
+            barrierPiecesList.Add(bottomRight4);
+            barrierPiecesList.Add(bottomRight5);
+            barrierPiecesList.Add(bottomRight6);
         }
 
         private void addBottomMiddleToList()
         {
-            this.barrierPiecesList.Add(this.bottomMiddle1);
-            this.barrierPiecesList.Add(this.bottomMiddle2);
-            this.barrierPiecesList.Add(this.bottomMiddle3);
-            this.barrierPiecesList.Add(this.bottomMiddle4);
-            this.barrierPiecesList.Add(this.bottomMiddle5);
+            barrierPiecesList.Add(bottomMiddle1);
+            barrierPiecesList.Add(bottomMiddle2);
+            barrierPiecesList.Add(bottomMiddle3);
+            barrierPiecesList.Add(bottomMiddle4);
+            barrierPiecesList.Add(bottomMiddle5);
         }
 
         private void addBottomLeftToList()
         {
-            this.barrierPiecesList.Add(this.bottomLeft1);
-            this.barrierPiecesList.Add(this.bottomLeft2);
-            this.barrierPiecesList.Add(this.bottomLeft3);
-            this.barrierPiecesList.Add(this.bottomLeft4);
-            this.barrierPiecesList.Add(this.bottomLeft5);
+            barrierPiecesList.Add(bottomLeft1);
+            barrierPiecesList.Add(bottomLeft2);
+            barrierPiecesList.Add(bottomLeft3);
+            barrierPiecesList.Add(bottomLeft4);
+            barrierPiecesList.Add(bottomLeft5);
         }
 
         private void addTopRightToList()
         {
-            this.barrierPiecesList.Add(this.topRight1);
-            this.barrierPiecesList.Add(this.topRight2);
-            this.barrierPiecesList.Add(this.topRight3);
-            this.barrierPiecesList.Add(this.topRight4);
-            this.barrierPiecesList.Add(this.topRight5);
-            this.barrierPiecesList.Add(this.topRight6);
+            barrierPiecesList.Add(topRight1);
+            barrierPiecesList.Add(topRight2);
+            barrierPiecesList.Add(topRight3);
+            barrierPiecesList.Add(topRight4);
+            barrierPiecesList.Add(topRight5);
+            barrierPiecesList.Add(topRight6);
         }
 
         private void addTopMiddleToList()
         {
-            this.barrierPiecesList.Add(this.topMiddle1);
-            this.barrierPiecesList.Add(this.topMiddle2);
-            this.barrierPiecesList.Add(this.topMiddle3);
-            this.barrierPiecesList.Add(this.topMiddle4);
-            this.barrierPiecesList.Add(this.topMiddle5);
-            this.barrierPiecesList.Add(this.topMiddle6);
+            barrierPiecesList.Add(topMiddle1);
+            barrierPiecesList.Add(topMiddle2);
+            barrierPiecesList.Add(topMiddle3);
+            barrierPiecesList.Add(topMiddle4);
+            barrierPiecesList.Add(topMiddle5);
+            barrierPiecesList.Add(topMiddle6);
         }
 
         private void addTopLeftToList()
         {
-            this.barrierPiecesList.Add(this.topLeft1);
-            this.barrierPiecesList.Add(this.topLeft2);
-            this.barrierPiecesList.Add(this.topLeft3);
-            this.barrierPiecesList.Add(this.topLeft4);
-            this.barrierPiecesList.Add(this.topLeft5);
-            this.barrierPiecesList.Add(this.topLeft6);
+            barrierPiecesList.Add(topLeft1);
+            barrierPiecesList.Add(topLeft2);
+            barrierPiecesList.Add(topLeft3);
+            barrierPiecesList.Add(topLeft4);
+            barrierPiecesList.Add(topLeft5);
+            barrierPiecesList.Add(topLeft6);
         }
 
         /// <summary>
-        /// Removes the top left piece.
+        ///     Removes the top left piece.
         /// </summary>
         public void RemoveTopLeftPiece()
         {
-            this.disableRectanglesInPiece("topLeft");
+            disableRectanglesInPiece("topLeft");
         }
 
         /// <summary>
-        /// Removes the top middle piece.
+        ///     Removes the top middle piece.
         /// </summary>
         public void RemoveTopMiddlePiece()
         {
-            this.disableRectanglesInPiece("topMiddle");
+            disableRectanglesInPiece("topMiddle");
         }
 
         /// <summary>
-        /// Removes the top right piece.
+        ///     Removes the top right piece.
         /// </summary>
         public void RemoveTopRightPiece()
         {
-            this.disableRectanglesInPiece("topRight");
+            disableRectanglesInPiece("topRight");
         }
 
         /// <summary>
-        /// Removes the bottom left piece.
+        ///     Removes the bottom left piece.
         /// </summary>
         public void RemoveBottomLeftPiece()
         {
-            this.disableRectanglesInPiece("bottomLeft");
+            disableRectanglesInPiece("bottomLeft");
         }
 
         /// <summary>
-        /// Removes the bottom middle piece.
+        ///     Removes the bottom middle piece.
         /// </summary>
         public void RemoveBottomMiddlePiece()
         {
-            this.disableRectanglesInPiece("bottomMiddle");
+            disableRectanglesInPiece("bottomMiddle");
         }
 
         /// <summary>
-        /// Removes the bottom right piece.
+        ///     Removes the bottom right piece.
         /// </summary>
         public void RemoveBottomRightPiece()
         {
-            this.disableRectanglesInPiece("bottomRight");
+            disableRectanglesInPiece("bottomRight");
         }
 
-        private void disableRectanglesInPiece(String rectanglePieceId)
+        private void disableRectanglesInPiece(string rectanglePieceId)
         {
-            foreach (var currentRectangle in this.barrierPiecesList)
+            foreach (var currentRectangle in barrierPiecesList)
             {
                 if (currentRectangle.Name.Contains(rectanglePieceId))
                 {

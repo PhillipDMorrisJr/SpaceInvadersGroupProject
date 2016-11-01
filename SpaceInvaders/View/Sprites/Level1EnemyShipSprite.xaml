@@ -12,13 +12,15 @@
     Width="50">
 
     <Canvas>
-        <Ellipse x:Name="domeTop" Width="35" Height="26" Canvas.Top="0" Canvas.Left="7" Fill="{StaticResource EnemyDomeColor}" />
+        <Ellipse x:Name="domeTop" Width="35" Height="26" Canvas.Top="0" Canvas.Left="7"
+                 Fill="{StaticResource EnemyDomeColor}" />
         <Ellipse Width="50" Height="15" Canvas.Top="11" Fill="{StaticResource EnemyShipBaseColor}" />
-        <Ellipse x:Name="domeBottom" Width="35" Height="5" Canvas.Top="10" Canvas.Left="7" Fill="{StaticResource EnemyDomeColor}" />
-        <Ellipse Style="{StaticResource Light1}" Fill="{StaticResource Level1ShipLightsColor}"/>
-        <Ellipse Style="{StaticResource Light2}" Fill="{StaticResource Level1ShipLightsColor}"/>
-        <Ellipse Style="{StaticResource Light3}" Fill="{StaticResource Level1ShipLightsColor}"/>
-        <Ellipse Style="{StaticResource Light4}" Fill="{StaticResource Level1ShipLightsColor}"/>
+        <Ellipse x:Name="domeBottom" Width="35" Height="5" Canvas.Top="10" Canvas.Left="7"
+                 Fill="{StaticResource EnemyDomeColor}" />
+        <Ellipse Style="{StaticResource Light1}" Fill="{StaticResource Level1ShipLightsColor}" />
+        <Ellipse Style="{StaticResource Light2}" Fill="{StaticResource Level1ShipLightsColor}" />
+        <Ellipse Style="{StaticResource Light3}" Fill="{StaticResource Level1ShipLightsColor}" />
+        <Ellipse Style="{StaticResource Light4}" Fill="{StaticResource Level1ShipLightsColor}" />
         <Rectangle Width="35" Height="4" Canvas.Top="22" Canvas.Left="7" Fill="{StaticResource EnemyShipBaseColor}" />
     </Canvas>
 </local:AbstractUserControl>
