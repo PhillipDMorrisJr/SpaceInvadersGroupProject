@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using Windows.UI.Composition;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -15,5 +16,10 @@ namespace SpaceInvaders.Model
         {
             Sprite = new BarrierSprite();
         }
+
+        /*public void RemoveTopLeftPiece()
+        {
+            this.Sprite.GetAnimationBaseValue(AnimationIterationBehavior.)
+        }*/
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using SpaceInvaders.Util;
 
 namespace SpaceInvaders.Model
 {
@@ -38,6 +39,8 @@ namespace SpaceInvaders.Model
 
         private int enemyMotionCounter;
         private Scoreboard gameScoreboard;
+        private EnemyShip bonusEnemyShip;
+        private double BonusShipOffset = 400.0;
 
         #endregion
 
@@ -123,17 +126,21 @@ namespace SpaceInvaders.Model
                 throw new ArgumentNullException(nameof(background));
             }
             this.currentBackground = background;
-
+            
             this.addPlayerShipToGame();
             this.addEnemyShipsToGame();
         }
 
         private void gameTimerOnTick(object sender, object e)
         {
+            this.addBonusEnemyToGame();
+            this.moveBonusEnemyShip();
+           // this.bonusEnemyShip.MoveLeft();
             this.MoveEnemyShips();
             this.FireEnemyBullet();
             this.HandleBullets();
             this.stopTimerAtGameOver();
+            //TODO: 
         }
 
         /// <summary>
@@ -231,7 +238,7 @@ namespace SpaceInvaders.Model
                 this.placePlayerBullet(aBullet);
             }
         }
-
+        
         private void handleEachEnemyBullet()
         {
             this.fireBulletAtPlayer();
@@ -240,26 +247,25 @@ namespace SpaceInvaders.Model
 
         private void fireBulletAtPlayer()
         {
-            var randomizer = new Random();
             var firingShips = this.fleet.GetFiringShips();
 
-            this.fireFiringShips(firingShips, randomizer);
+            this.fireFiringShips(firingShips);
         }
 
-        private void fireFiringShips(List<EnemyShip> firingShips, Random randomizer)
+        private void fireFiringShips(List<EnemyShip> firingShips)
         {
             if (firingShips.Any())
             {
-                this.fireMultipleShips(randomizer, firingShips);
+                this.fireMultipleShips(firingShips);
             }
         }
 
-        private void fireMultipleShips(Random randomizer, List<EnemyShip> firingShips)
+        private void fireMultipleShips(List<EnemyShip> firingShips)
         {
-            var amountOfShipsToFire = randomizer.Next(firingShips.Count());
+            var amountOfShipsToFire = RandomUtil.GetNextRandomFromMax(firingShips.Count());
             for (var i = 0; i < amountOfShipsToFire; i++)
             {
-                var firingShip = this.selectFiringShip(randomizer, amountOfShipsToFire, firingShips);
+                var firingShip = this.selectFiringShip(amountOfShipsToFire, firingShips);
                 this.fireShipWhenShipHasNotFired(firingShip);
             }
         }
@@ -289,10 +295,10 @@ namespace SpaceInvaders.Model
             return isEnemyWaiting;
         }
 
-        private EnemyShip selectFiringShip(Random randomizer, int amountOfShipsToFire,
+        private EnemyShip selectFiringShip(int amountOfShipsToFire,
             List<EnemyShip> firingShips)
         {
-            var firingShipIndex = randomizer.Next(amountOfShipsToFire);
+            var firingShipIndex = RandomUtil.GetNextRandomFromMax(amountOfShipsToFire);
             var firingShip = firingShips[firingShipIndex];
             return firingShip;
         }
@@ -613,6 +619,51 @@ namespace SpaceInvaders.Model
             }
         }
 
+        private void addBonusEnemyToGame()
+        {
+            //TODO: check if working
+            var randomInt = RandomUtil.GetNextRandomFromMax(30);
+            if (!this.currentBackground.Children.Contains(this.bonusEnemyShip.Sprite))
+            {
+                this.bonusEnemyShip = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.BonusShip);
+                this.currentBackground.Children.Add(this.bonusEnemyShip.Sprite);
+                this.placeBonusEnemyShip();
+            }
+        }
+
+        private void placeBonusEnemyShip()
+        {
+            //TODO: check if working
+            this.bonusEnemyShip.X = this.currentBackground.Width - this.bonusEnemyShip.Width;
+            this.bonusEnemyShip.Y = this.currentBackground.Height - this.bonusEnemyShip.Height - this.BonusShipOffset;
+        }
+
+        private void moveBonusEnemyShip()
+        {
+            //TODO: check if working
+            if (this.currentBackground.Children.Contains(this.bonusEnemyShip.Sprite))
+            {
+                var backgroundOrigin = 0;
+
+                if (this.bonusEnemyShip.X > backgroundOrigin)
+                {
+                    this.bonusEnemyShip.MoveLeft();
+                }
+                else
+                {
+                    this.removeBonusShipFromGame();
+                } 
+            }
+        }
+
+        private void removeBonusShipFromGame()
+        {
+            //TODO: check if working
+            this.currentBackground.Children.Remove(this.bonusEnemyShip.Sprite);
+            this.bonusEnemyShip = null;
+            this.BonusEnemyShipVisible = false;
+        }
+
         private void handlePlayerBulletHits()
         {
             var currentfleet = this.fleet.GetAllEnemyShips();
@@ -650,6 +701,11 @@ namespace SpaceInvaders.Model
         {
             if (this.bulletHitShip(bullet, enemy))
             {
+                if (enemy.Level == 0)
+                {
+                    this.gameScoreboard.IncreaseScore(10);
+                    this.BonusEnemyShipVisible = false;
+                }
                 this.gameScoreboard.IncreaseScore(enemy.Level);
                 this.fleet.RemoveEnemyFromFleet(enemy);
                 this.removeBulletFromGame(bullet);
@@ -668,12 +724,7 @@ namespace SpaceInvaders.Model
             var bulletInXBound = (enemyXOrigin <= bullet.X) && (bullet.X <= rightSideOfEnemy);
             var bulletInYBound = (enemyYOrigin <= bullet.Y) && (bullet.Y <= bottomOfEnemy);
 
-            if (bulletInXBound && bulletInYBound)
-            {
-                return true;
-            }
-
-            return false;
+            return bulletInXBound && bulletInYBound;
         }
 
         /// <summary>
@@ -797,6 +848,14 @@ namespace SpaceInvaders.Model
         ///     Records game score
         /// </summary>
         public int GameScore => this.gameScoreboard.Score;
+
+        /// <summary>
+        /// Gets a value indicating whether [bonus enemy ship visible].
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if [bonus enemy ship visible]; otherwise, <c>false</c>.
+        /// </value>
+        public bool BonusEnemyShipVisible { get; set; } = false;
 
         #endregion
     }

@@ -19,6 +19,16 @@ namespace SpaceInvaders.Util
         }
 
         /// <summary>
+        /// Gets the next random from max.
+        /// </summary>
+        /// <param name="maxValue">The maximum value.</param>
+        /// <returns></returns>
+        public static int GetNextRandomFromMax(int maxValue)
+        {
+            return random.Next(maxValue);
+        }
+
+        /// <summary>
         /// Gets the next random from range.
         /// </summary>
         /// <param name="minValue">The minimum value.</param>
