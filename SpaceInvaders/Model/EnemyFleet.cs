@@ -102,7 +102,11 @@ namespace SpaceInvaders.Model
         {
             foreach (var enemyRow in this.Fleet)
             {
-                enemyRow.Remove(enemyShip);
+                if (enemyRow.Contains(enemyShip))
+                {
+                    enemyRow.Remove(enemyShip);
+                }
+                
             }
         }
 

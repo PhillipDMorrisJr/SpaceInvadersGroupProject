@@ -40,7 +40,6 @@ namespace SpaceInvaders.Model
         private int enemyMotionCounter;
         private Scoreboard gameScoreboard;
         private EnemyShip bonusEnemyShip;
-        private double BonusShipOffset = 400.0;
 
         #endregion
 
@@ -133,14 +132,23 @@ namespace SpaceInvaders.Model
 
         private void gameTimerOnTick(object sender, object e)
         {
-            this.addBonusEnemyToGame();
-            this.moveBonusEnemyShip();
-           // this.bonusEnemyShip.MoveLeft();
+            this.handleBonusShip();
+
+            // this.bonusEnemyShip.MoveLeft();
             this.MoveEnemyShips();
             this.FireEnemyBullet();
             this.HandleBullets();
             this.stopTimerAtGameOver();
-            //TODO: 
+             
+        }
+
+        private void handleBonusShip()
+        {
+
+            this.addBonusEnemyToGame();
+            this.moveBonusEnemyShip();
+
+
         }
 
         /// <summary>
@@ -190,6 +198,7 @@ namespace SpaceInvaders.Model
                 this.removeEnemyBulletFromPlayWhenItHitsPlayerShip(enemyBullet);
             }
         }
+
 
         private void removeEnemyBulletFromPlayWhenItHitsPlayerShip(Bullet enemyBullet)
         {
@@ -621,9 +630,8 @@ namespace SpaceInvaders.Model
 
         private void addBonusEnemyToGame()
         {
-            //TODO: check if working
             var randomInt = RandomUtil.GetNextRandomFromMax(30);
-            if (!this.currentBackground.Children.Contains(this.bonusEnemyShip.Sprite))
+            if (this.bonusEnemyShip == null)
             {
                 this.bonusEnemyShip = (EnemyShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.BonusShip);
                 this.currentBackground.Children.Add(this.bonusEnemyShip.Sprite);
@@ -633,14 +641,12 @@ namespace SpaceInvaders.Model
 
         private void placeBonusEnemyShip()
         {
-            //TODO: check if working
             this.bonusEnemyShip.X = this.currentBackground.Width - this.bonusEnemyShip.Width;
-            this.bonusEnemyShip.Y = this.currentBackground.Height - this.bonusEnemyShip.Height - this.BonusShipOffset;
+            this.bonusEnemyShip.Y = this.bonusEnemyShip.Height;
         }
 
         private void moveBonusEnemyShip()
         {
-            //TODO: check if working
             if (this.currentBackground.Children.Contains(this.bonusEnemyShip.Sprite))
             {
                 var backgroundOrigin = 0;
@@ -658,7 +664,6 @@ namespace SpaceInvaders.Model
 
         private void removeBonusShipFromGame()
         {
-            //TODO: check if working
             this.currentBackground.Children.Remove(this.bonusEnemyShip.Sprite);
             this.bonusEnemyShip = null;
             this.BonusEnemyShipVisible = false;
@@ -694,6 +699,18 @@ namespace SpaceInvaders.Model
             foreach (var bulletFired in playerBulletsFired)
             {
                 this.removeEnemyHitByBulletFromGame(bulletFired, enemy);
+
+                this.checkBonusShipHit(bulletFired);
+            }
+        }
+
+        private void checkBonusShipHit(Bullet bulletFired)
+        {
+            if (this.bonusEnemyShip != null && this.currentBackground.Children.Contains(this.bonusEnemyShip.Sprite)
+            
+        )
+            {
+                this.removeEnemyHitByBulletFromGame(bulletFired, this.bonusEnemyShip);
             }
         }
 
@@ -703,8 +720,8 @@ namespace SpaceInvaders.Model
             {
                 if (enemy.Level == 0)
                 {
-                    this.gameScoreboard.IncreaseScore(10);
-                    this.BonusEnemyShipVisible = false;
+                    this.gameScoreboard.IncreaseScore(10000);
+                    this.currentBackground.Children.Remove(this.bonusEnemyShip.Sprite);
                 }
                 this.gameScoreboard.IncreaseScore(enemy.Level);
                 this.fleet.RemoveEnemyFromFleet(enemy);
