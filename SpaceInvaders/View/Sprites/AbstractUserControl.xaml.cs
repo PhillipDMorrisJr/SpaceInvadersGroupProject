@@ -3,7 +3,6 @@
 namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    /// 
     /// </summary>
     public abstract partial class AbstractUserControl : UserControl, ISpriteRenderer
     {

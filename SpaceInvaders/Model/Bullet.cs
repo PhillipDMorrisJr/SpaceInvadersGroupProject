@@ -7,13 +7,6 @@ namespace SpaceInvaders.Model
     /// </summary>
     public class Bullet : GameObject
     {
-        #region Data members
-
-        private const int SpeedXDirection = 0;
-        private const int SpeedYDirection = 9;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -24,6 +17,13 @@ namespace SpaceInvaders.Model
             Sprite = new BulletSprite();
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
+
+        #endregion
+
+        #region Data members
+
+        private const int SpeedXDirection = 0;
+        private const int SpeedYDirection = 9;
 
         #endregion
     }

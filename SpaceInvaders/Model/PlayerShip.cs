@@ -10,24 +10,6 @@ namespace SpaceInvaders.Model
     /// <seealso cref="SpaceInvaders.Model.GameObject" />
     public class PlayerShip : GameObject
     {
-        #region Data members
-
-        private const int SpeedXDirection = 3;
-        private const int SpeedYDirection = 0;
-        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, GameManager.TickInterval, 0);
-        #endregion
-
-
-        #region Property
-
-        /// <summary>
-        /// Returns boolean if playerShip is destroyed
-        /// </summary>
-        public bool Destroyed { get; set; }
-
-        #endregion
-
-
         #region Constructors
 
         /// <summary>
@@ -35,8 +17,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public PlayerShip()
         {
-            DispatcherTimer timer = new DispatcherTimer {Interval = this.gameTickInterval};
-            timer.Tick += this.timerOnTick;
+            var timer = new DispatcherTimer {Interval = gameTickInterval};
+            timer.Tick += timerOnTick;
             timer.Start();
 
             Sprite = new PlayerShipSprite();
@@ -45,15 +27,32 @@ namespace SpaceInvaders.Model
 
         #endregion
 
+        #region Property
+
+        /// <summary>
+        ///     Returns boolean if playerShip is destroyed
+        /// </summary>
+        public bool Destroyed { get; set; }
+
+        #endregion
+
         #region Methods
 
         private void timerOnTick(object sender, object e)
         {
-            if (this.Destroyed)
+            if (Destroyed)
             {
-                this.Destroyed = false;
+                Destroyed = false;
             }
         }
+
+        #endregion
+
+        #region Data members
+
+        private const int SpeedXDirection = 3;
+        private const int SpeedYDirection = 0;
+        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, GameManager.TickInterval, 0);
 
         #endregion
     }

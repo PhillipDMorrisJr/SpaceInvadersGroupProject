@@ -56,8 +56,8 @@ namespace SpaceInvaders.Model
             {
                 level = 1;
             }
-            this.Level = level;
-            
+            Level = level;
+
             switch (level)
             {
                 case 0:
@@ -86,8 +86,6 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
-
-        
 
         #endregion
     }

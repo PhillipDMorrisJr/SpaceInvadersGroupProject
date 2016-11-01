@@ -1,7 +1,7 @@
 ﻿namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    /// Draws bonus enemy ship.
+    ///     Draws bonus enemy ship.
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.AbstractUserControl" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
@@ -9,7 +9,7 @@
     public sealed partial class BonusEnemyShipSprite
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BonusEnemyShipSprite"/> class.
+        ///     Initializes a new instance of the <see cref="BonusEnemyShipSprite" /> class.
         /// </summary>
         public BonusEnemyShipSprite()
         {

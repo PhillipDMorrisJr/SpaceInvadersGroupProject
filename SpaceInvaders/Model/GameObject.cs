@@ -26,11 +26,11 @@ namespace SpaceInvaders.Model
         /// </value>
         public double X
         {
-            get { return this.location.X; }
+            get { return location.X; }
             set
             {
-                this.location.X = value;
-                this.render();
+                location.X = value;
+                render();
             }
         }
 
@@ -42,11 +42,11 @@ namespace SpaceInvaders.Model
         /// </value>
         public double Y
         {
-            get { return this.location.Y; }
+            get { return location.Y; }
             set
             {
-                this.location.Y = value;
-                this.render();
+                location.Y = value;
+                render();
             }
         }
 
@@ -72,7 +72,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The width.
         /// </value>
-        public double Width => this.Sprite.Width;
+        public double Width => Sprite.Width;
 
         /// <summary>
         ///     Gets the height of the game object.
@@ -80,7 +80,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The height.
         /// </value>
-        public double Height => this.Sprite.Height;
+        public double Height => Sprite.Height;
 
         /// <summary>
         ///     Gets or sets the sprite associated with the game object.
@@ -101,7 +101,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveRight()
         {
-            this.moveX(this.SpeedX);
+            moveX(SpeedX);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveDown()
         {
-            this.moveY(this.SpeedY);
+            moveY(SpeedY);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveUp()
         {
-            this.moveY(-this.SpeedY);
+            moveY(-SpeedY);
         }
 
         /// <summary>
@@ -131,24 +131,24 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveLeft()
         {
-            this.moveX(-this.SpeedX);
+            moveX(-SpeedX);
         }
 
         private void moveX(int x)
         {
-            this.X += x;
+            X += x;
         }
 
         private void moveY(int y)
         {
-            this.Y += y;
+            Y += y;
         }
 
         private void render()
         {
-            var render = this.Sprite as ISpriteRenderer;
+            var render = Sprite as ISpriteRenderer;
 
-            render?.RenderAt(this.X, this.Y);
+            render?.RenderAt(X, Y);
         }
 
         /// <summary>
@@ -170,8 +170,8 @@ namespace SpaceInvaders.Model
                 throw new ArgumentOutOfRangeException(nameof(speedY));
             }
 
-            this.SpeedX = speedX;
-            this.SpeedY = speedY;
+            SpeedX = speedX;
+            SpeedY = speedY;
         }
 
         #endregion

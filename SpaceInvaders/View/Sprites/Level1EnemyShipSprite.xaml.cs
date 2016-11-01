@@ -29,14 +29,8 @@ namespace SpaceInvaders.View.Sprites
 
         #endregion
 
-        #region Methods
-
-        
-
-        #endregion
-
         /// <summary>
-        /// Manages an AnimationGameTimer
+        ///     Manages an AnimationGameTimer
         /// </summary>
         /// <seealso cref="SpaceInvaders.Util.TimerUtil" />
         public class AnimationGameTimer : TimerUtil
@@ -44,7 +38,7 @@ namespace SpaceInvaders.View.Sprites
             private readonly Level1EnemyShipSprite parent;
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="AnimationGameTimer"/> class.
+            ///     Initializes a new instance of the <see cref="AnimationGameTimer" /> class.
             /// </summary>
             /// <param name="parent">The parent.</param>
             public AnimationGameTimer(Level1EnemyShipSprite parent)
@@ -53,24 +47,28 @@ namespace SpaceInvaders.View.Sprites
             }
 
             /// <summary>
-            /// Timers on tick event.
+            ///     Timers on tick event.
             /// </summary>
             /// <param name="sender">The sender.</param>
             /// <param name="e">The e.</param>
             public override void TimerOnTick(object sender, object e)
             {
-                if (this.TickCount % 2 == 0)
+                if (TickCount%2 == 0)
                 {
-                    this.parent.domeTop.Fill = new SolidColorBrush(Colors.Gainsboro);
-                    this.parent.domeBottom.Fill = new SolidColorBrush(Colors.Gainsboro);
+                    parent.domeTop.Fill = new SolidColorBrush(Colors.Gainsboro);
+                    parent.domeBottom.Fill = new SolidColorBrush(Colors.Gainsboro);
                 }
                 else
                 {
-                    this.parent.domeTop.Fill = new SolidColorBrush(Colors.DimGray);
-                    this.parent.domeBottom.Fill = new SolidColorBrush(Colors.DimGray);
+                    parent.domeTop.Fill = new SolidColorBrush(Colors.DimGray);
+                    parent.domeBottom.Fill = new SolidColorBrush(Colors.DimGray);
                 }
-                this.TickCount++;
+                TickCount++;
             }
         }
+
+        #region Methods
+
+        #endregion
     }
 }

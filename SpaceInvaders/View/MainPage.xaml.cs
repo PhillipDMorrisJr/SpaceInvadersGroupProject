@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Foundation;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -17,6 +20,33 @@ namespace SpaceInvaders.View
     /// </summary>
     public sealed partial class MainPage
     {
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MainPage" /> class.
+        /// </summary>
+        public MainPage()
+        {
+            InitializeComponent();
+
+            ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
+
+            timer = new DispatcherTimer {Interval = gameTickInterval};
+
+            timer.Tick += timerOnTick;
+            timer.Start();
+
+            gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
+            gameManager.InitializeGame(theCanvas);
+
+
+            Window.Current.CoreWindow.KeyDown += coreWindowOnKeyDown;
+        }
+
+        #endregion
+
         #region Data members
 
         /// <summary>
@@ -41,77 +71,48 @@ namespace SpaceInvaders.View
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="MainPage" /> class.
-        /// </summary>
-        public MainPage()
-        {
-            this.InitializeComponent();
-
-            ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
-
-            this.timer = new DispatcherTimer {Interval = this.gameTickInterval};
-
-            this.timer.Tick += this.timerOnTick;
-            this.timer.Start();
-
-            this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
-            this.gameManager.InitializeGame(this.theCanvas);
-
-
-                Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-            
-
-        }
-
-        #endregion
-
         #region Methods
 
         private void timerOnTick(object sender, object e)
         {
-            this.updateGameStatistics();
+            updateGameStatistics();
         }
 
         private void displayGameOverScreen()
         {
-            if (this.gameManager.IsGameOver())
+            if (gameManager.IsGameOver())
             {
-                var score = this.gameManager.GameScore;
+                var score = gameManager.GameScore;
                 var gameOverDialog = new MessageDialog("Game Over\n" + "Your Final score: " + score);
 
                 gameOverDialog.ShowAsync();
-                this.timer.Stop();
+                timer.Stop();
             }
         }
 
         private void updateGameStatistics()
         {
-            this.textBlock.Text = this.gameManager.GameStatistics;
+            textBlock.Text = gameManager.GameStatistics;
 
-            if (this.gameManager.IsGameOver())
+            if (gameManager.IsGameOver())
             {
-                this.displayGameOverScreen();
+                displayGameOverScreen();
             }
         }
 
-        private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
+        private async void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
                     if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Space) & CoreVirtualKeyStates.Down) != 0)
                     {
-                        this.gameManager.MovePlayerShipLeft();
-                        this.fireBulltWhenGameIsNotOver();
+                        gameManager.MovePlayerShipLeft();
+                        fireBulltWhenGameIsNotOver();
                     }
                     else
                     {
-                        this.gameManager.MovePlayerShipLeft();
+                        gameManager.MovePlayerShipLeft();
                     }
                     break;
 
@@ -119,42 +120,55 @@ namespace SpaceInvaders.View
                 case VirtualKey.Right:
                     if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Space) & CoreVirtualKeyStates.Down) != 0)
                     {
-                        this.gameManager.MovePlayerShipRight();
-                        this.fireBulltWhenGameIsNotOver();
+                        gameManager.MovePlayerShipRight();
+                        fireBulltWhenGameIsNotOver();
                     }
                     else
                     {
-                        this.gameManager.MovePlayerShipRight();
+                        gameManager.MovePlayerShipRight();
                     }
-                    
+
                     break;
 
                 case VirtualKey.Space:
+                    await playShootSound();
+
                     if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Right) & CoreVirtualKeyStates.Down) != 0)
                     {
-                        this.gameManager.MovePlayerShipRight();
-                        this.fireBulltWhenGameIsNotOver();
+                        gameManager.MovePlayerShipRight();
+                        fireBulltWhenGameIsNotOver();
                     }
                     else if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Left) & CoreVirtualKeyStates.Down) !=
                              0)
                     {
-                        this.gameManager.MovePlayerShipLeft();
-                        this.fireBulltWhenGameIsNotOver();
+                        gameManager.MovePlayerShipLeft();
+                        fireBulltWhenGameIsNotOver();
                     }
                     else
                     {
-                        this.fireBulltWhenGameIsNotOver();
+                        fireBulltWhenGameIsNotOver();
                     }
 
                     break;
             }
         }
 
+        private static async Task playShootSound()
+        {
+            var shootSound = new MediaElement();
+            var folder =
+                await Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            var file = await folder.GetFileAsync("phasers3.wav");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+            shootSound.SetSource(stream, file.ContentType);
+            shootSound.Play();
+        }
+
         private void fireBulltWhenGameIsNotOver()
         {
-            if (!this.gameManager.IsGameOver())
+            if (!gameManager.IsGameOver())
             {
-                this.gameManager.FirePlayerBullet();
+                gameManager.FirePlayerBullet();
             }
         }
 

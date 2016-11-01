@@ -14,6 +14,7 @@ namespace SpaceInvaders.Model
 
         private const int AmountOfBufferShips = 1;
         private readonly List<PlayerShip> lives;
+
         #endregion
 
         #region Properties
@@ -24,7 +25,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The amount of amountOfLives.
         /// </value>
-        public int AmountOfLives => this.lives.Count - AmountOfBufferShips;
+        public int AmountOfLives => lives.Count - AmountOfBufferShips;
 
         /// <summary>
         ///     Gets a value indicating whether this instance is there any amountOfLives.
@@ -32,7 +33,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     <c>true</c> if this instance is there any amountOfLives; otherwise, <c>false</c>.
         /// </value>
-        public bool IsThereAnyLives => this.lives.Count > AmountOfBufferShips;
+        public bool IsThereAnyLives => lives.Count > AmountOfBufferShips;
 
         #endregion
 
@@ -53,8 +54,8 @@ namespace SpaceInvaders.Model
         {
             amountOfLives = addLifeWhenThereAreNoLives(amountOfLives);
 
-            this.lives = new List<PlayerShip>();
-            this.addLives(amountOfLives);
+            lives = new List<PlayerShip>();
+            addLives(amountOfLives);
         }
 
         #endregion
@@ -72,26 +73,26 @@ namespace SpaceInvaders.Model
 
         private void addLives(int amountOfLives)
         {
-            PlayerShip initialPlayerShip = (PlayerShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
+            var initialPlayerShip = (PlayerShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
 
-            this.lives.Add(initialPlayerShip);
+            lives.Add(initialPlayerShip);
 
             for (var i = 0; i < amountOfLives; i++)
             {
-                var aPlayerShip = (PlayerShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
-                this.lives.Add(aPlayerShip);
+                var aPlayerShip = (PlayerShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
+                lives.Add(aPlayerShip);
             }
 
-            var bufferPlayerShip = (PlayerShip)ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
-            this.lives.Add(bufferPlayerShip);
+            var bufferPlayerShip = (PlayerShip) ShipFactory.SelectShip(ShipFactory.ShipSelections.PlayerShip);
+            lives.Add(bufferPlayerShip);
         }
 
         private void removeLifeInUse()
         {
-            if (this.lives.Any())
+            if (lives.Any())
             {
-                var playerShipInUse = this.lives.First();
-                this.lives.Remove(playerShipInUse);
+                var playerShipInUse = lives.First();
+                lives.Remove(playerShipInUse);
             }
         }
 
@@ -103,16 +104,16 @@ namespace SpaceInvaders.Model
         /// <returns>An unused playerShip</returns>
         public PlayerShip UseLife()
         {
-            this.checkForLives();
+            checkForLives();
 
-            this.removeLifeInUse();
+            removeLifeInUse();
 
-            return this.lives.First();
+            return lives.First();
         }
 
         private void checkForLives()
         {
-            if (!this.lives.Any())
+            if (!lives.Any())
             {
                 throw new InvalidOperationException("There are no more amountOfLives.");
             }

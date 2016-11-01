@@ -22,8 +22,8 @@ namespace SpaceInvaders
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            Suspending += this.OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
 
         #endregion
@@ -52,7 +52,7 @@ namespace SpaceInvaders
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
-                rootFrame.NavigationFailed += this.OnNavigationFailed;
+                rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
