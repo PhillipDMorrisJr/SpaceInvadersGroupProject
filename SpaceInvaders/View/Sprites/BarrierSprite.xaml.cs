@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Shapes;
 
@@ -10,8 +9,12 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     public sealed partial class BarrierSprite
     {
+        #region Data members
+
         private readonly List<Rectangle> barrierPiecesList;
-        
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -99,7 +102,7 @@ namespace SpaceInvaders.View.Sprites
         }
 
         /// <summary>
-        /// Removes the top left piece.
+        ///     Removes the top left piece.
         /// </summary>
         public void RemoveTopLeftPiece()
         {
@@ -107,7 +110,7 @@ namespace SpaceInvaders.View.Sprites
         }
 
         /// <summary>
-        /// Removes the top middle piece.
+        ///     Removes the top middle piece.
         /// </summary>
         public void RemoveTopMiddlePiece()
         {
@@ -115,7 +118,7 @@ namespace SpaceInvaders.View.Sprites
         }
 
         /// <summary>
-        /// Removes the top right piece.
+        ///     Removes the top right piece.
         /// </summary>
         public void RemoveTopRightPiece()
         {
@@ -123,7 +126,7 @@ namespace SpaceInvaders.View.Sprites
         }
 
         /// <summary>
-        /// Removes the bottom left piece.
+        ///     Removes the bottom left piece.
         /// </summary>
         public void RemoveBottomLeftPiece()
         {
@@ -131,7 +134,7 @@ namespace SpaceInvaders.View.Sprites
         }
 
         /// <summary>
-        /// Removes the bottom middle piece.
+        ///     Removes the bottom middle piece.
         /// </summary>
         public void RemoveBottomMiddlePiece()
         {
@@ -139,14 +142,14 @@ namespace SpaceInvaders.View.Sprites
         }
 
         /// <summary>
-        /// Removes the bottom right piece.
+        ///     Removes the bottom right piece.
         /// </summary>
         public void RemoveBottomRightPiece()
         {
             this.disableRectanglesInPiece("bottomRight");
         }
 
-        private void disableRectanglesInPiece(String rectanglePieceId)
+        private void disableRectanglesInPiece(string rectanglePieceId)
         {
             foreach (var currentRectangle in this.barrierPiecesList)
             {
