@@ -13,5 +13,9 @@
 
     <Canvas>
         <Ellipse Height="8" Width="6" Fill="Magenta"></Ellipse>
+        <MediaElement
+        Source="phasers3.wav" Name="fireSound" Volume="1" AutoPlay="True" 
+    />
     </Canvas>
+
 </local:AbstractUserControl>

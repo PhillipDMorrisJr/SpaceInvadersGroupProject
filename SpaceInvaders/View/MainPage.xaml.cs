@@ -6,7 +6,9 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
+using SpaceInvaders.Util;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -99,7 +101,7 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
+        private async void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
             switch (args.VirtualKey)
             {
@@ -126,10 +128,13 @@ namespace SpaceInvaders.View
                     {
                         this.gameManager.MovePlayerShipRight();
                     }
-                    
+
                     break;
 
                 case VirtualKey.Space:
+                    //   SoundFx.PlaySound();
+                    await playShootSound();
+
                     if ((Window.Current.CoreWindow.GetAsyncKeyState(VirtualKey.Right) & CoreVirtualKeyStates.Down) != 0)
                     {
                         this.gameManager.MovePlayerShipRight();
@@ -148,6 +153,17 @@ namespace SpaceInvaders.View
 
                     break;
             }
+        }
+
+        private static async Task playShootSound()
+        {
+            MediaElement mysong = new MediaElement();
+            Windows.Storage.StorageFolder folder =
+            await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            Windows.Storage.StorageFile file = await folder.GetFileAsync("phasers3.wav");
+            var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            mysong.SetSource(stream, file.ContentType);
+            mysong.Play();
         }
 
         private void fireBulltWhenGameIsNotOver()

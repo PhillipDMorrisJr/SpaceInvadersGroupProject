@@ -16,6 +16,8 @@
         public BulletSprite()
         {
             this.InitializeComponent();
+            this.fireSound.Stop();
+            this.fireSound.Play();
         }
 
         #endregion

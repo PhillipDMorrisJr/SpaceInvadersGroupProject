@@ -360,6 +360,7 @@ namespace SpaceInvaders.Model
 
             if (bullet.Y > backgroundOrigin)
             {
+                
                 bullet.MoveUp();
             }
             else
