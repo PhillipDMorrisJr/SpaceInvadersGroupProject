@@ -15,19 +15,18 @@ namespace SpaceInvaders.Model
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
         private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, GameManager.TickInterval, 0);
-        private readonly DispatcherTimer timer;
-
         #endregion
 
-        #region Properties
 
         #region Property
 
+        /// <summary>
+        /// Returns boolean if playerShip is destroyed
+        /// </summary>
         public bool Destroyed { get; set; }
 
         #endregion
 
-        #endregion
 
         #region Constructors
 
@@ -36,9 +35,9 @@ namespace SpaceInvaders.Model
         /// </summary>
         public PlayerShip()
         {
-            this.timer = new DispatcherTimer {Interval = this.gameTickInterval};
-            this.timer.Tick += this.timerOnTick;
-            this.timer.Start();
+            DispatcherTimer timer = new DispatcherTimer {Interval = this.gameTickInterval};
+            timer.Tick += this.timerOnTick;
+            timer.Start();
 
             Sprite = new PlayerShipSprite();
             SetSpeed(SpeedXDirection, SpeedYDirection);

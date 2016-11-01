@@ -23,7 +23,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The get level.
         /// </value>
-        public int GetLevel { get; }
+        public int Level { get; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance has fired.
@@ -56,7 +56,7 @@ namespace SpaceInvaders.Model
             {
                 level = 1;
             }
-            this.GetLevel = level;
+            this.Level = level;
             
             switch (level)
             {
