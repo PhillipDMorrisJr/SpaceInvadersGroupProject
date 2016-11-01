@@ -52,7 +52,7 @@ namespace SpaceInvaders.Model
         /// <param name="level">The level.</param>
         public EnemyShip(int level)
         {
-            if (level < 1)
+            if (level < 0)
             {
                 level = 1;
             }
@@ -60,6 +60,10 @@ namespace SpaceInvaders.Model
             
             switch (level)
             {
+                case 0:
+                    Sprite = new BonusEnemyShipSprite();
+                    SetSpeed(SpeedXDirection, SpeedYDirection);
+                    break;
                 case 1:
                     Sprite = new Level1EnemyShipSprite();
                     SetSpeed(SpeedXDirection, SpeedYDirection);

@@ -103,13 +103,12 @@
     <Compile Include="Model\EnemyFleet.cs" />
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
-    <Compile Include="Model\PlayerShipLives.cs" />
     <Compile Include="Model\HighScoreBoard.cs" />
     <Compile Include="Model\PlayerShipFactory.cs" />
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="Model\RankedPlayer.cs" />
     <Compile Include="Model\Scoreboard.cs" />
-    <Compile Include="Model\ShipFactory.cs" />
+    <Compile Include="Util\ShipFactory.cs" />
     <Compile Include="Util\RandomUtil.cs" />
     <Compile Include="Util\TimerUtil.cs" />
     <Compile Include="View\MainPage.xaml.cs">

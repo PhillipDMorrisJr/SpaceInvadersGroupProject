@@ -5,7 +5,7 @@ using System.Linq;
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    ///     Stores copies of a player Ship
+    ///     Stores copies of a player ShipSelections
     /// </summary>
     public class PlayerShipFactory
     {
