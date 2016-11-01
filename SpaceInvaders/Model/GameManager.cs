@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    ///     Manages the entire game.
+    ///     Manages the entire game. stuuf
     /// </summary>
     public class GameManager
     {
