@@ -68,7 +68,7 @@ namespace SpaceInvaders.Model
                 throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
             }
 
-            this.currentLevel = 0;
+            this.currentLevel = 1;
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             

@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI;
+using Windows.UI.Xaml.Media;
+using SpaceInvaders.Util;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -10,7 +12,7 @@ namespace SpaceInvaders.View.Sprites
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level1EnemyShipSprite : ISpriteRenderer
+    public sealed partial class Level1EnemyShipSprite
     {
         #region Constructors
 
@@ -22,25 +24,53 @@ namespace SpaceInvaders.View.Sprites
         public Level1EnemyShipSprite()
         {
             this.InitializeComponent();
+            var timer = new AnimationGameTimer(this);
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        ///     Renders the sprite at the specified location.
-        ///     Precondition: none
-        ///     Postcondition: sprite drawn at location (x,y)
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public void RenderAt(double x, double y)
-        {
-            Canvas.SetLeft(this, x);
-            Canvas.SetTop(this, y);
-        }
+        
 
         #endregion
+
+        /// <summary>
+        /// Manages an AnimationGameTimer
+        /// </summary>
+        /// <seealso cref="SpaceInvaders.Util.TimerUtil" />
+        public class AnimationGameTimer : TimerUtil
+        {
+            private readonly Level1EnemyShipSprite parent;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="AnimationGameTimer"/> class.
+            /// </summary>
+            /// <param name="parent">The parent.</param>
+            public AnimationGameTimer(Level1EnemyShipSprite parent)
+            {
+                this.parent = parent;
+            }
+
+            /// <summary>
+            /// Timers on tick event.
+            /// </summary>
+            /// <param name="sender">The sender.</param>
+            /// <param name="e">The e.</param>
+            public override void TimerOnTick(object sender, object e)
+            {
+                if (this.TickCount % 2 == 0)
+                {
+                    this.parent.domeTop.Fill = new SolidColorBrush(Colors.Gainsboro);
+                    this.parent.domeBottom.Fill = new SolidColorBrush(Colors.Gainsboro);
+                }
+                else
+                {
+                    this.parent.domeTop.Fill = new SolidColorBrush(Colors.DimGray);
+                    this.parent.domeBottom.Fill = new SolidColorBrush(Colors.DimGray);
+                }
+                this.TickCount++;
+            }
+        }
     }
 }

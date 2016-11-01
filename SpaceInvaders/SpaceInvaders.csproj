@@ -97,20 +97,34 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Barrier.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\EnemyShip.cs" />
     <Compile Include="Model\EnemyFleet.cs" />
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
+    <Compile Include="Model\PlayerShipLives.cs" />
     <Compile Include="Model\HighScoreBoard.cs" />
     <Compile Include="Model\PlayerShipFactory.cs" />
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="Model\RankedPlayer.cs" />
     <Compile Include="Model\Scoreboard.cs" />
+    <Compile Include="Model\ShipFactory.cs" />
+    <Compile Include="Util\RandomUtil.cs" />
+    <Compile Include="Util\TimerUtil.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Sprites\AbstractUserControl.xaml.cs">
+      <DependentUpon>AbstractUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\BarrierSprite.xaml.cs">
+      <DependentUpon>BarrierSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\BonusEnemyShipSprite.xaml.cs">
+      <DependentUpon>BonusEnemyShipSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\BulletSprite.xaml.cs">
       <DependentUpon>BulletSprite.xaml</DependentUpon>
     </Compile>
@@ -146,6 +160,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="View\spaceBackground.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -155,6 +170,18 @@
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\AbstractUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\BarrierSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\BonusEnemyShipSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\BulletSprite.xaml">
       <SubType>Designer</SubType>
@@ -184,6 +211,9 @@
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

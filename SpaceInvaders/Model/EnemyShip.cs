@@ -1,6 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -14,7 +12,6 @@ namespace SpaceInvaders.Model
 
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
-        private readonly TimeSpan gameTickInterval = new TimeSpan(0, 0, 0, 0, GameManager.TickInterval);
 
         #endregion
 
@@ -54,16 +51,13 @@ namespace SpaceInvaders.Model
         /// </summary>
         /// <param name="level">The level.</param>
         public EnemyShip(int level)
-        {            if (level < 1)
+        {
+            if (level < 1)
             {
                 level = 1;
             }
             this.Level = level;
-            DispatcherTimer timer = new DispatcherTimer {Interval = this.gameTickInterval};
-
-            timer.Tick += this.timerOnTick;
-            timer.Start();
-
+            
             switch (level)
             {
                 case 1:
@@ -89,22 +83,7 @@ namespace SpaceInvaders.Model
 
         #region Methods
 
-        private void timerOnTick(object sender, object e)
-        {
-            if (this.HasFired)
-            {
-                this.HasFired = false;
-            }
-
-            if (Sprite.Visibility == Visibility.Collapsed)
-            {
-                Sprite.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Sprite.Visibility = Visibility.Collapsed;
-            }
-        }
+        
 
         #endregion
     }

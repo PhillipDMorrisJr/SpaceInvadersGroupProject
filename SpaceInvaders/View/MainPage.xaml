@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Canvas x:Name="theCanvas" Width="1080" Height="720">
-        <Image Source="https://static3.scirra.net/images/newstore/products/112/splash.png"
+        <Image Source="spaceBackground.png"
                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="2604" Width="2322" Canvas.Left="-736"
                Canvas.Top="-982" />
         <TextBlock x:Name="textBlock" Canvas.Left="1078" TextWrapping="Wrap" Canvas.Top="725" Height="39" Width="112"

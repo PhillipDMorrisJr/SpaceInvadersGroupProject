@@ -1,4 +1,8 @@
-﻿namespace SpaceInvaders.Model
+﻿/// <summary>
+/// 
+/// </summary>
+
+namespace SpaceInvaders.Model
 {
     internal class Scoreboard
     {

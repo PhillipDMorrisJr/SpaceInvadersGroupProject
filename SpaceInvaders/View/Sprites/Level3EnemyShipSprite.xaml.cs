@@ -8,8 +8,9 @@ namespace SpaceInvaders.View.Sprites
     ///     Draws a Level 3 ship.
     ///     Must implemente the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
+    /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level3EnemyShipSprite : ISpriteRenderer
+    public sealed partial class Level3EnemyShipSprite
     {
         #region Constructors
 
@@ -27,18 +28,7 @@ namespace SpaceInvaders.View.Sprites
 
         #region Methods
 
-        /// <summary>
-        ///     Renders the sprite at the specified location.
-        ///     Precondition: none
-        ///     Postcondition: sprite drawn at location (x,y)
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public void RenderAt(double x, double y)
-        {
-            Canvas.SetLeft(this, x);
-            Canvas.SetTop(this, y);
-        }
+        
 
         #endregion
     }

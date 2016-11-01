@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<local:AbstractUserControl
     x:Class="SpaceInvaders.View.Sprites.PlayerShipSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,20 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="40.667"
-    Width="51.778">
+    d:DesignHeight="33"
+    d:DesignWidth="50"
+    Height="33"
+    Width="50">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PlayerShipColor" Color="Green" />
+        <SolidColorBrush x:Key="PlayerShipColor" Color="Yellow" />
     </UserControl.Resources>
 
     <Canvas>
-        <Image x:Name="image" Height="42.108" Width="58.877"
-               Source="http://www.puppetsquid.com/FTL/stfx/arwing_base.png" RenderTransformOrigin="0.5,0.5"
-               Canvas.Left="-3.883" Canvas.Top="-0.554" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Image.RenderTransform>
-                <CompositeTransform Rotation="-90" />
-            </Image.RenderTransform>
-        </Image>
+        <Rectangle Width="50" Height="20" Canvas.Top="13" Fill="{StaticResource PlayerShipColor}" />
+        <Rectangle Width="40" Height="5" Canvas.Top="8" Canvas.Left="5" Fill="{StaticResource PlayerShipColor}" />
+        <Rectangle Width="6" Height="8" Canvas.Left="22" Fill="{StaticResource PlayerShipColor}" />
     </Canvas>
-</UserControl>
+</local:AbstractUserControl>

@@ -1,16 +1,11 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace SpaceInvaders.View.Sprites
+﻿namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
     ///     Draws a level 2 ship.
     ///     Must implemente the ISpriteRenderer so will be displayed as a game object.
     /// </summary>
-    /// <seealso cref="SpaceInvaders.View.Sprites.ISpriteRenderer" />
-    public sealed partial class Level2EnemyShipSprite : ISpriteRenderer
+    /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
+    public sealed partial class Level2EnemyShipSprite
     {
         #region Constructors
 
@@ -28,22 +23,7 @@ namespace SpaceInvaders.View.Sprites
 
         #region Methods
 
-        /// <summary>
-        ///     Renders the sprite at the specified location.
-        ///     Precondition: none
-        ///     Postcondition: sprite drawn at location (x,y)
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public void RenderAt(double x, double y)
-        {
-            Canvas.SetLeft(this, x);
-            Canvas.SetTop(this, y);
-        }
-
-        private void Level1EnemyShipSprite_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
+        
 
         #endregion
     }
